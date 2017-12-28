@@ -24,7 +24,6 @@ pids
 bower_components
 
 # Dependency directories
-node_modules/**
 **/node_modules/**
 
 # Typescript v1 declaration files
@@ -41,4 +40,4 @@ typings/
 .env.production.local
 
 # Filesystem
-.DS_Store
+**/.DS_Store
