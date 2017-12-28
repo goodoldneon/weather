@@ -2,32 +2,75 @@ require('dotenv').config()
 
 const axios = require('axios')
 
-const getForecast = async (lat, lng) => {
-    const key = process.env.DARKSKY_API_KEY
-    const url = `https://api.darksky.net/forecast/${key}/${lat},${lng}?exclude=[minutely,hourly,daily]`
+const parseDay = (raw) => {
+	return {
+		time: new Date(0).setUTCSeconds(raw.time),
+		summary: raw.summary,
+		icon: raw.icon,
+		sunrise: new Date(0).setUTCSeconds(raw.sunriseTime),
+		sunset: new Date(0).setUTCSeconds(raw.sunsetTime),
+		moonPhase: raw.moonPhase,
+		temperature: {
+			actual: {
+				low: raw.temperatureLow,
+				high: raw.temperatureHigh,
+			},
+			apparent: {
+				low: raw.apparentTemperatureLow,
+				high: raw.apparentTemperatureHigh,
+			},
+		},
+		precip: {
+			probability: raw.precipProbability,
+		},
+		humidity: raw.humidity,
+		cloudCover: raw.cloudCover,
+		wind: {
+			speed: raw.windSpeed,
+			gust: raw.windGust,
+			bearing: raw.windBearing,
+		},
+	}
+}
 
-    const res = await axios.get(
-      url,
-      {
-        crossdomain: true,
-        headers: {
-            'Access-Control-Allow-Origin': '*',
-            'Content-Type': 'application/json',
-        },
-      },
-    )
+const getData = async (lat, lng) => {
+    const key = process.env.DARKSKY_API_KEY
+	const url = `https://api.darksky.net/forecast/${key}/${lat},${lng}?exclude=[minutely]&units=us`
+	
+	console.log(url)
+
+    const res = await axios.get(url)
   
     if (res.status !== 200) {
       console.log(`Weather not found for zip "${zip}"`)
   
       return {}
     }
-  
-    // const obj = res.data.results[0]
-  
-    return res.data
+
+	const current = res.data.currently
+	
+	const forecast = [parseDay(res.data.daily.data[0])]
+
+    return {
+        current: {
+			summary: current.summary,
+			icon: current.icon,
+			temperature: {
+				actual: current.temperature,
+				apparent: current.apparentTemperature,
+			},
+			humidity: current.humidity,
+			cloudCover: current.cloudCover,
+			wind: {
+				speed: current.windSpeed,
+				gust: current.windGust,
+				bearing: current.windBearing,
+			}
+		},
+		forecast,
+	}
 }
 
 module.exports = {
-    getForecast
+	getData
 }
