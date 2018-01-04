@@ -1,23 +1,15 @@
 import React, { Component } from 'react'
 import { Row, Col } from 'antd'
-import { format, parse } from 'date-fns'
+// import { format } from 'date-fns'
 
-const conditionToIconName = (condition) => {
-	switch (condition.toLowerCase()) {
-		case 'clear':
-			return 'wi-night-clear'
-		default:
-			return 'wi-na'	
-	}
+const getIconName = (icon) => {
+	return `wi-day-${icon}`
 }
 
 class WeatherCurrent extends Component {
 	render() {
-		console.log(this.props.current)
-		console.log(this.props.day)
-
 		const current = this.props.current
-		const day = this.props.day
+		// const day = this.props.day
 
 		if (current.temperature !== undefined) {
 			return (
@@ -34,8 +26,8 @@ class WeatherCurrent extends Component {
 							<div>Humidity {Math.round(100 * current.humidity)}%</div>
 						</Col>
 
-						<Col span={8} style={{fontSize: '8em'}}>
-							<i className={`wi ${conditionToIconName(current.summary)}`}></i>
+						<Col span={8} style={{fontSize: '6em', textAlign: 'right'}}>
+							<i className={`wi ${getIconName(current.icon)}`}></i>
 						</Col>
 					</Row>
 				</div>

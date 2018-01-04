@@ -2,6 +2,16 @@ require('dotenv').config()
 
 const axios = require('axios')
 
+const parseHour = (raw) => {
+	return {
+		time: new Date(0).setUTCSeconds(raw.time),
+		temperature: {
+			actual: raw.temperature,
+			apparent: raw.apparentTemperature,
+		},
+	}
+}
+
 const parseDay = (raw) => {
 	return {
 		time: new Date(0).setUTCSeconds(raw.time),
@@ -48,8 +58,17 @@ const getData = async (lat, lng) => {
     }
 
 	const current = res.data.currently
-	
-	const forecast = [parseDay(res.data.daily.data[0])]
+	// const forecast = [parseDay(res.data.daily.data[0])]
+	const days = []
+	const hours = []
+
+	for (let day of res.data.daily.data) {
+		days.push(parseDay(day))
+	}
+
+	for (let hour of res.data.hourly.data) {
+		hours.push(parseHour(hour))
+	}
 
     return {
         current: {
@@ -67,7 +86,9 @@ const getData = async (lat, lng) => {
 				bearing: current.windBearing,
 			}
 		},
-		forecast,
+		// forecast,
+		days: days,
+		hours: hours,
 	}
 }
 

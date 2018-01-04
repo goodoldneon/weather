@@ -3,6 +3,7 @@ import axios from 'axios'
 import '../css/weather-icons.min.css'
 
 import WeatherCurrent from './WeatherCurrent'
+import HourlyChart from './HourlyChart'
 
 class MainContainer extends Component {
 	constructor() {
@@ -11,7 +12,8 @@ class MainContainer extends Component {
 		this.state = {
 			location: {},
 			current: {},
-			forecast: [],
+			days: [],
+			hours: [],
 		}
 	}
 
@@ -24,31 +26,39 @@ class MainContainer extends Component {
 
 		const res = await axios.get(url)
 
+		if (res.error) {
+			console.log(res.error.msg)
+			return
+		}
+
 		this.setState({
 			location: res.data.location,
 			current: res.data.current,
-			forecast: res.data.forecast,
+			days: res.data.days,
+			hours: res.data.hours,
 		})
-		// console.log(res.data)
-	  
-		// if (res.status !== 200) {
-		//   console.log(`Weather not found for zip "${zip}"`)
-	  
-		//   return {}
-		// }
-	  
-		// const obj = res.data.results[0]
-	  
-		// return res
+
+		console.log(res.data)
 	}
 
 	render() {
+		const hourlyChartData = this.state.hours.map(a => {
+			return {
+				x: a.time,
+				y: a.temperature.actual,
+			}
+		})
+
 		return (
 			<div style={{width: '600px', margin: 'auto'}}>
-				<WeatherCurrent
-					current={this.state.current}
-					day={this.state.forecast[0]}
-				/>
+				{this.state.current !== undefined && this.state.days !== undefined &&
+					<WeatherCurrent
+						current={this.state.current}
+						day={this.state.days[0]}
+					/>
+				}
+
+				<HourlyChart data={hourlyChartData} />
 			</div>
 		)
   	}
