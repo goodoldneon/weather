@@ -20,37 +20,30 @@ app.get('/'), (req, res) => {
 
 app.get('/api', async (req, res) => {
     const zip = req.query.zip
-
-    // const location = {
-    //     name: 'Ann Arbor, MI 48105, USA'
-    // }
-
-    // const data = {
-    //     currently: {
-    //         temperature: 9.35
-    //     }
-    // }
-
     const location = JSON.parse(fs.readFileSync('./data/location.json'))
     const weatherData = JSON.parse(fs.readFileSync('./data/weather.json'))
 
     // const location = await geocode.getPointFromZip(zip)
+
+    if (location.error) {
+        console.log(location.error.msg)
+        return res.status(500).send({
+            error: location.error
+        })
+    }
     // const weatherData = await weather.getData(location.lat, location.lng)
 
-    // console.log(data)
+    fs.writeFileSync('./data/location.json', JSON.stringify(location) , 'utf-8')
+    fs.writeFileSync('./data/weather.json', JSON.stringify(weatherData) , 'utf-8')
 
-    const output = {
+    res.status(200).send({
         location: {
             name: location.name,
         },
         current: weatherData.current,
-        forecast: weatherData.forecast,
-    }
-
-    // fs.writeFileSync('./data/location.json', JSON.stringify(location) , 'utf-8')
-    // fs.writeFileSync('./data/weather.json', JSON.stringify(weatherData) , 'utf-8')
-
-    res.status(200).send(output)
+        days: weatherData.days,
+        hours: weatherData.hours,
+    })
 })
 
 app.listen(app.get('port'), () => console.log(`Weather API is listening on port ${app.get('port')}`))
