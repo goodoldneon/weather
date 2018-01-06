@@ -1,7 +1,8 @@
 const axios = require('axios')
 
 const getPointFromZip = async (zip) => {
-    const url = `http://maps.googleapis.com/maps/api/geocode/json?address=${zip}`
+    const key = process.env.GOOGLE_API_KEY
+    const url = `https://maps.googleapis.com/maps/api/geocode/json?key=${key}&address=${zip}`
     const res = await axios.get(
 		url,
 		{
@@ -25,12 +26,14 @@ const getPointFromZip = async (zip) => {
 				msg: res.data.error_message
 			}
 		}
-	}
-  
+    }
+
+    const data = res.data.results[0]
+
     return {
-		name: obj.formatted_address,
-		lat: obj.geometry.location.lat,
-		lng: obj.geometry.location.lng,
+		name: data.formatted_address,
+		lat: data.geometry.location.lat,
+		lng: data.geometry.location.lng,
     }
 }
 
