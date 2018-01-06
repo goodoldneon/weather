@@ -1,7 +1,10 @@
-# testing
+# Cached data
+/data/**
+
+# Testing
 /coverage
 
-# production
+# Production
 /build
 
 # Logs

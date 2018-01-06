@@ -40,13 +40,13 @@ class ForecastDay extends Component {
 
                 <div style={{borderBottom: '1px solid rgba(255, 255, 255, 0.6)', margin: '10px'}} />
 
-                <div style={{display: 'flex', alignItems: 'center'}}>
+                <div style={{display: 'flex', alignItems: 'center', marginBottom: '10px'}}>
                     <div style={{flexGrow: 1, fontSize: '1.8em'}}>
                         <i className={`wi ${getIconName(day.icon)}`}></i>
                     </div>
 
                     <div style={{flexGrow: 1, fontSize: '1.2em', textAlign: 'right'}}>
-                        <i className={`wi ${getIconName(day.precip.type)}`} style={{paddingRight: '5px'}}></i>
+                        <i className={`wi wi-raindrop`} style={{paddingRight: '5px'}}></i>
                         {Math.round(day.precip.probability * 100)}%
                     </div>
                 </div>
