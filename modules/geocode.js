@@ -11,7 +11,7 @@ const getPointFromZip = async (zip) => {
 				'Content-Type': 'application/json',
 			},
 		},
-    )
+	)
 
     if (res.status !== 200) {
 		return {
@@ -26,8 +26,6 @@ const getPointFromZip = async (zip) => {
 			}
 		}
 	}
-console.log(res)
-    const obj = res.data.results[0]
   
     return {
 		name: obj.formatted_address,

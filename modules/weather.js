@@ -31,7 +31,9 @@ const parseDay = (raw) => {
 			},
 		},
 		precip: {
+			type: raw.precipType,
 			probability: raw.precipProbability,
+			accumulation: raw.precipAccumulation,
 		},
 		humidity: raw.humidity,
 		cloudCover: raw.cloudCover,
