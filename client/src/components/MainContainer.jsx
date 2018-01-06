@@ -17,7 +17,7 @@ class MainContainer extends Component {
 			current: null,
 			days: [],
             hours: [],
-            activeDaysIndex: 0,
+            activeDayIndex: 0,
 		}
 	}
 
@@ -54,14 +54,14 @@ class MainContainer extends Component {
         })
         
         const days = this.state.days
-        const activeDaysIndex = this.state.activeDaysIndex
+        const activeDayIndex = this.state.activeDayIndex
         let activeDay = null
         
-        if (activeDaysIndex <= (days.length + 1)) {
-            if (activeDaysIndex === 0) {
+        if (activeDayIndex <= (days.length + 1)) {
+            if (activeDayIndex === 0) {
                 activeDay = this.state.current
             } else {
-                activeDay = days[activeDaysIndex]
+                activeDay = days[activeDayIndex]
             }
         }
 
@@ -69,11 +69,15 @@ class MainContainer extends Component {
 			<div style={{width: '600px', margin: 'auto'}}>
 				<div>
 					{days.length >= 4 &&
-						<ForecastDays data={days} />
+                        <ForecastDays
+                            days={days.slice(0, 4)}
+                            activeDayIndex={activeDayIndex}
+                            onChangeActiveDayIndex={val => this.setState({activeDayIndex: val})}
+                        />
 					}
 				</div>
 
-                <div style={{border: '1px solid rgba(255, 255, 255, 0.6)', borderTop: '0px'}}>
+                <div style={{border: '1px solid rgba(255, 255, 255, 0.6)', borderTop: null}}>
                     <WeatherActive data={activeDay} />
                 </div>
 

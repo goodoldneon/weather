@@ -36,7 +36,7 @@ class WeatherActive extends Component {
             font-size: 1.2em;
         `
 
-        console.log(data)
+        // console.log(data)
 
         if (data) {
             return (
