@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import '../css/weather-icons.min.css'
+import '../css/weather-icons-wind.min.css'
 
 import { ForecastDays } from './ForecastDays'
-import WeatherCurrent from './WeatherCurrent'
+// import WeatherCurrent from './WeatherCurrent'
+import WeatherActive from './WeatherActive'
 import HourlyChart from './HourlyChart'
 
 class MainContainer extends Component {
@@ -11,10 +13,11 @@ class MainContainer extends Component {
 		super()
 
 		this.state = {
-			location: {},
-			current: {},
+			location: null,
+			current: null,
 			days: [],
-			hours: [],
+            hours: [],
+            activeDaysIndex: 0,
 		}
 	}
 
@@ -39,7 +42,7 @@ class MainContainer extends Component {
 			hours: res.data.hours,
 		})
 
-		console.log(res.data.days)
+		console.log(res.data.days[0])
 	}
 
 	render() {
@@ -48,24 +51,40 @@ class MainContainer extends Component {
 				x: a.time,
 				y: a.temperature.actual,
 			}
-		})
+        })
+        
+        const days = this.state.days
+        const activeDaysIndex = this.state.activeDaysIndex
+        let activeDay = null
+        
+        if (activeDaysIndex <= (days.length + 1)) {
+            if (activeDaysIndex === 0) {
+                activeDay = this.state.current
+            } else {
+                activeDay = days[activeDaysIndex]
+            }
+        }
 
 		return (
 			<div style={{width: '600px', margin: 'auto'}}>
 				<div>
-					{this.state.days.length >= 4 &&
-						<ForecastDays data={this.state.days} />
+					{days.length >= 4 &&
+						<ForecastDays data={days} />
 					}
 				</div>
 
-				<div>
+                <div style={{border: '1px solid rgba(255, 255, 255, 0.6)', borderTop: '0px'}}>
+                    <WeatherActive data={activeDay} />
+                </div>
+
+				{/* <div>
 					{this.state.current !== undefined && this.state.days !== undefined &&
 						<WeatherCurrent
 							current={this.state.current}
 							day={this.state.days[0]}
 						/>
 					}
-				</div>
+				</div> */}
 
 				{/* <HourlyChart data={hourlyChartData} /> */}
 			</div>

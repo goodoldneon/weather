@@ -77,8 +77,16 @@ const getData = async (lat, lng) => {
 			summary: current.summary,
 			icon: current.icon,
 			temperature: {
-				actual: current.temperature,
-				apparent: current.apparentTemperature,
+				actual: {
+                    now: current.temperature,
+                    low: days[0].temperature.actual.low,
+                    high: days[0].temperature.actual.high,
+                },
+				apparent: {
+                    now: current.apparentTemperature,
+                    low: days[0].temperature.apparent.low,
+                    high: days[0].temperature.apparent.high,
+                },
 			},
 			humidity: current.humidity,
 			cloudCover: current.cloudCover,
