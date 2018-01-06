@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import '../css/weather-icons.min.css'
 
+import { ForecastDays } from './ForecastDays'
 import WeatherCurrent from './WeatherCurrent'
 import HourlyChart from './HourlyChart'
 
@@ -38,7 +39,7 @@ class MainContainer extends Component {
 			hours: res.data.hours,
 		})
 
-		console.log(res.data)
+		console.log(res.data.days)
 	}
 
 	render() {
@@ -51,14 +52,22 @@ class MainContainer extends Component {
 
 		return (
 			<div style={{width: '600px', margin: 'auto'}}>
-				{this.state.current !== undefined && this.state.days !== undefined &&
-					<WeatherCurrent
-						current={this.state.current}
-						day={this.state.days[0]}
-					/>
-				}
+				<div>
+					{this.state.days.length >= 4 &&
+						<ForecastDays data={this.state.days} />
+					}
+				</div>
 
-				<HourlyChart data={hourlyChartData} />
+				<div>
+					{this.state.current !== undefined && this.state.days !== undefined &&
+						<WeatherCurrent
+							current={this.state.current}
+							day={this.state.days[0]}
+						/>
+					}
+				</div>
+
+				{/* <HourlyChart data={hourlyChartData} /> */}
 			</div>
 		)
   	}
