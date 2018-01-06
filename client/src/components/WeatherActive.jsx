@@ -48,7 +48,7 @@ class WeatherActive extends Component {
                             </span>
 
                             <span>
-                                {Math.round(data.temperature.actual.now)}&deg;F
+                                ...
                             </span>
                         </div>
 
@@ -56,7 +56,7 @@ class WeatherActive extends Component {
                             <Row style={{marginBottom: '5px'}}>
                                 <Col span={8}>
                                     <Label>Feels Like</Label>
-                                    <Value>{Math.round(data.temperature.apparent.now)}&deg;</Value>
+                                    <Value>...</Value>
                                 </Col>
 
                                 <Col span={8}>

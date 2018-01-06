@@ -60,7 +60,6 @@ const getData = async (lat, lng) => {
     }
 
 	const current = res.data.currently
-	// const forecast = [parseDay(res.data.daily.data[0])]
 	const days = []
 	const hours = []
 
@@ -77,16 +76,8 @@ const getData = async (lat, lng) => {
 			summary: current.summary,
 			icon: current.icon,
 			temperature: {
-				actual: {
-                    now: current.temperature,
-                    low: days[0].temperature.actual.low,
-                    high: days[0].temperature.actual.high,
-                },
-				apparent: {
-                    now: current.apparentTemperature,
-                    low: days[0].temperature.apparent.low,
-                    high: days[0].temperature.apparent.high,
-                },
+				actual: current.temperature,
+				apparent: current.apparentTemperature,
 			},
 			humidity: current.humidity,
 			cloudCover: current.cloudCover,
@@ -96,7 +87,6 @@ const getData = async (lat, lng) => {
 				bearing: current.windBearing,
 			}
 		},
-		// forecast,
 		days: days,
 		hours: hours,
 	}
