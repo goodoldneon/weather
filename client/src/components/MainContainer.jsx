@@ -66,20 +66,16 @@ class MainContainer extends Component {
         }
 
 		return (
-			<div style={{width: '600px', margin: 'auto'}}>
-				<div>
-					{days.length >= 4 &&
-                        <ForecastDays
-                            days={days.slice(0, 4)}
-                            activeDayIndex={activeDayIndex}
-                            onChangeActiveDayIndex={val => this.setState({activeDayIndex: val})}
-                        />
-					}
-				</div>
+			<div style={{width: '600px', margin: 'auto', border: '1px solid rgba(255, 255, 255, 0.6)', borderTop: null}}>
+                {days.length >= 4 &&
+                    <ForecastDays
+                        days={days.slice(0, 4)}
+                        activeDayIndex={activeDayIndex}
+                        onChangeActiveDayIndex={val => this.setState({activeDayIndex: val})}
+                    />
+                }
 
-                <div style={{border: '1px solid rgba(255, 255, 255, 0.6)', borderTop: null}}>
-                    <WeatherActive data={activeDay} />
-                </div>
+                <WeatherActive data={activeDay} />
 
 				{/* <div>
 					{this.state.current !== undefined && this.state.days !== undefined &&

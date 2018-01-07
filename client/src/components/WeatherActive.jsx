@@ -40,7 +40,7 @@ class WeatherActive extends Component {
 
         if (data) {
             return (
-                <div style={{padding: '10px'}}>
+                <div style={{padding: '10px', background: 'rgba(0, 0, 0, 0.2'}}>
                     <div style={{display: 'flex', alignItems: 'center'}}>
                         <div style={{flexGrow: 1, fontSize: '5em'}}>
                             <span style={{marginRight: '20px'}}>

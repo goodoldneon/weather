@@ -23,12 +23,23 @@ const getIconName = (icon) => {
 }
 
 class ForecastDay extends Component {
+    constructor() {
+        super()
+        this.state = {isHover: false}
+    }
+
 	render() {
         const day = this.props.data
         const isToday = isBefore(day.time, addDays(startOfToday(), 1))
+        const isHover = this.state.isHover
         
 		return (
-            <div style={{padding: '10px'}} onClick={this.props.onClick}>
+            <div
+                onClick={this.props.onClick}
+                onMouseEnter={() => this.setState({isHover: true})}
+                onMouseLeave={() => this.setState({isHover: false})}
+                style={{padding: '10px', background: (isHover ? 'rgba(255, 255, 255, 0.2)' : null)}}
+            >
                 <div style={{display: 'flex', alignItems: 'center'}}>
                     <div style={{flexGrow: 1, fontSize: '1.2em'}}>
                         {isToday ? 'Today' : format(day.time, 'ddd')}
@@ -77,10 +88,9 @@ class ForecastDays extends Component {
                         <Col
                             span={6}
                             style={{
-                                borderLeft: (i === 0 ? '1px solid rgba(255, 255, 255, 0.6)' : null),
-                                borderRight: '1px solid rgba(255, 255, 255, 0.6)',
-                                borderBottom: (isActiveDay ? null : '1px solid rgba(255, 255, 255, 0.6)'),
-                                background: (isActiveDay ? null : 'rgba(0, 0, 0, 0.2)'),
+                                borderLeft: (i !== 0 ? '1px solid rgba(255, 255, 255, 0.6)' : null),
+                                borderBottom: `1px solid ${isActiveDay ? 'transparent' : 'rgba(255, 255, 255, 0.6)'}`,
+                                background: `rgba(0, 0, 0, ${isActiveDay ? 0.2 : 0.5}`,
                             }}
                             key={i}
                         >
