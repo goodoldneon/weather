@@ -38,7 +38,7 @@ class ForecastDay extends Component {
                 onClick={this.props.onClick}
                 onMouseEnter={() => this.setState({isHover: true})}
                 onMouseLeave={() => this.setState({isHover: false})}
-                style={{padding: '10px', background: (isHover ? 'rgba(255, 255, 255, 0.2)' : null)}}
+                style={{padding: '10px', background: (isHover ? 'rgba(255, 255, 255, 0.1)' : null)}}
             >
                 <div style={{display: 'flex', alignItems: 'center'}}>
                     <div style={{flexGrow: 1, fontSize: '1.2em'}}>
@@ -88,9 +88,9 @@ class ForecastDays extends Component {
                         <Col
                             span={6}
                             style={{
-                                borderLeft: (i !== 0 ? '1px solid rgba(255, 255, 255, 0.6)' : null),
-                                borderBottom: `1px solid ${isActiveDay ? 'transparent' : 'rgba(255, 255, 255, 0.6)'}`,
-                                background: `rgba(0, 0, 0, ${isActiveDay ? 0.4 : 0.7}`,
+                                borderLeft: (i !== 0 ? '2px solid rgba(255, 255, 255, 0.8)' : null),
+                                borderBottom: `2px solid ${isActiveDay ? 'transparent' : 'rgba(255, 255, 255, 0.8)'}`,
+                                background: `rgba(0, 0, 0, ${isActiveDay ? 0.3 : 0.7}`,
                             }}
                             key={i}
                         >

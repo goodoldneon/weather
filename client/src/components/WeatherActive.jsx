@@ -3,45 +3,17 @@ import { Row, Col } from 'antd'
 import styled from 'styled-components'
 import { format } from 'date-fns'
 
-const getIconName = (icon) => {
-    const iconTranslate = {
-        'clear-day': 'day-sunny',
-        'clear-night': 'night-clear',
-        'rain': 'raindrop',
-        'snow': 'snow',
-        'sleet': 'sleet',
-        'wind': 'windy',
-        'fog': 'fog',
-        'cloudy': 'cloudy',
-        'partly-cloudy-day': 'day-cloudy',
-        'partly-cloudy-night': 'night-alt-cloudy',
-        'hail': 'hail',
-        'thunderstorm': 'thunderstorm',
-        'tornado': 'tornado'
-    }
-
-    return `wi-${(iconTranslate[icon] || 'na')}`
-}
+import { getIconName } from './common/icon.js'
+import { Label, Value } from './common/style'
 
 class WeatherActive extends Component {
 	render() {
         const data = this.props.data
         const colorFade = 'rgba(255, 255, 255, 0.6)'
 
-        const Label = styled.div`
-            font-size: 0.9em;
-            color: rgba(255, 255, 255, 0.6);
-        `
-
-        const Value = styled.div`
-            font-size: 1.2em;
-        `
-
-        console.log(data)
-
         if (data) {
             return (
-                <div style={{padding: '10px', background: 'rgba(0, 0, 0, 0.4'}}>
+                <div style={{padding: '10px', paddingTop: 0, background: 'rgba(0, 0, 0, 0.3'}}>
                     <div style={{display: 'flex', alignItems: 'center', textAlign: 'center'}}>
                         <div style={{width: '20%', fontSize: '5em'}}>
                             <i className={`wi ${getIconName(data.icon)}`}></i>
@@ -94,7 +66,7 @@ class WeatherActive extends Component {
                         </div>
                     </div>
 
-                    <div style={{fontSize: '1.5em'}}>
+                    <div style={{fontSize: '1.5em', textAlign: 'center'}}>
                         {data.summary}
                     </div>
                 </div>

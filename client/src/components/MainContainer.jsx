@@ -3,8 +3,8 @@ import axios from 'axios'
 import '../css/weather-icons.min.css'
 import '../css/weather-icons-wind.min.css'
 
+import WeatherCurrent from './WeatherCurrent'
 import { ForecastDays } from './ForecastDays'
-// import WeatherCurrent from './WeatherCurrent'
 import WeatherActive from './WeatherActive'
 import HourlyChart from './HourlyChart'
 
@@ -41,8 +41,6 @@ class MainContainer extends Component {
 			days: res.data.days,
 			hours: res.data.hours,
 		})
-
-		// console.log(res.data.days[0])
 	}
 
 	render() {
@@ -53,17 +51,17 @@ class MainContainer extends Component {
 			}
         })
         
+        const current = this.state.current
         const days = this.state.days
         const activeDayIndex = this.state.activeDayIndex
-        let activeDay = null
-        
+
         // Make sure index doesn't go past array length.
-        if (activeDayIndex <= (days.length + 1)) {
-            activeDay = days[activeDayIndex]
-        }
+        let activeDay = (activeDayIndex <= (days.length + 1)) ? days[activeDayIndex] : null
 
 		return (
 			<div style={{width: '600px', margin: 'auto'}}>
+                <WeatherCurrent data={current} />
+
                 {days.length >= 4 &&
                     <ForecastDays
                         days={days.slice(0, 4)}
@@ -73,17 +71,6 @@ class MainContainer extends Component {
                 }
 
                 <WeatherActive data={activeDay} />
-
-				{/* <div>
-					{this.state.current !== undefined && this.state.days !== undefined &&
-						<WeatherCurrent
-							current={this.state.current}
-							day={this.state.days[0]}
-						/>
-					}
-				</div> */}
-
-				{/* <HourlyChart data={hourlyChartData} /> */}
 			</div>
 		)
   	}

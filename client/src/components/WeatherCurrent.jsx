@@ -1,49 +1,69 @@
 import React, { Component } from 'react'
 import { Row, Col } from 'antd'
-// import { format } from 'date-fns'
 
-const getIconName = (icon) => {
-	return `wi-day-${icon}`
-}
+import { getIconName } from './common/icon'
+import { Label, Value } from './common/style'
 
 class WeatherCurrent extends Component {
 	render() {
-		const current = this.props.current
-		// const day = this.props.day
+        const data = this.props.data
 
-		if (current.temperature !== undefined) {
-			return (
-				<div style={{textAlign: 'center'}}>
-					<Row gutter={0} type='flex' justify='space-around' align='middle'>
-						<Col span={8} style={{fontSize: '5em', textAlign: 'left'}}>
-							{Math.round(current.temperature.actual)}&deg;F
-						</Col>
+        if (data) {
+            return (
+                <div style={{
+                    padding: '10px',
+                    borderBottom: '2px solid rgba(255, 255, 255, 0.8)',
+                    background: 'rgba(0, 0, 0, 0.3)',
+                }}>
+					<div style={{fontSize: '1.5em'}}>
+						Now
+					</div>
 
-						<Col span={8} style={{fontSize: '1.1em', textAlign: 'left'}}>
-							<div>Feels like {Math.round(current.temperature.apparent)}&deg;F</div>
-							<div>{current.summary}</div>
-							<div>Wind {Math.round(current.wind.speed)} mph</div>
-							<div>Humidity {Math.round(100 * current.humidity)}%</div>
-						</Col>
+					<div style={{display: 'flex', alignItems: 'center', textAlign: 'center'}}>
+						<div style={{flexGrow: 1, marginLeft: '10px', marginRight: '10px', fontSize: '5em'}}>
+							<i className={`wi ${getIconName(data.icon)}`} />
+						</div>
 
-						<Col span={8} style={{fontSize: '6em', textAlign: 'right'}}>
-							<i className={`wi ${getIconName(current.icon)}`}></i>
-						</Col>
-					</Row>
-				</div>
-			)
-		} else {
-			return null
-		}
+						<div style={{flexGrow: 1, fontSize: '5em'}}>
+							{Math.round(data.temperature.actual)}&deg;F
+						</div>
+
+						<div style={{flexGrow: 10}}>
+							<Row style={{marginBottom: '5px'}}>
+								<Col span={6}>
+									<Label>Feels Like</Label>
+									<Value>{Math.round(data.temperature.apparent)}&deg;</Value>
+								</Col>
+
+								<Col span={6}>
+									<Label>Wind</Label>
+									<Value>{Math.round(data.wind.speed)} mph</Value>
+								</Col>
+
+								<Col span={6}>
+									<Label>Gust</Label>
+									<Value>{Math.round(data.wind.gust)} mph</Value>
+								</Col>
+
+								<Col span={6}>
+									<Label>Humidity</Label>
+									<Value>{Math.round(data.humidity * 100)}%</Value>
+								</Col>
+							</Row>
+						</div>
+					</div>
+
+					<div style={{fontSize: '1.5em', textAlign: 'center'}}>
+                        {data.summary}
+                    </div>
+                </div>
+            )
+        } else {
+            return (
+                <div />
+            )
+        }
   	}
-}
-
-WeatherCurrent.defaultProps = {
-	data: {
-		temperature: {
-			actual: null,
-		},
-	},
 }
 
 export default WeatherCurrent
