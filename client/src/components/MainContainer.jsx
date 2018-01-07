@@ -42,7 +42,7 @@ class MainContainer extends Component {
 			hours: res.data.hours,
 		})
 
-		console.log(res.data.days[0])
+		// console.log(res.data.days[0])
 	}
 
 	render() {
@@ -57,16 +57,13 @@ class MainContainer extends Component {
         const activeDayIndex = this.state.activeDayIndex
         let activeDay = null
         
+        // Make sure index doesn't go past array length.
         if (activeDayIndex <= (days.length + 1)) {
-            if (activeDayIndex === 0) {
-                activeDay = this.state.current
-            } else {
-                activeDay = days[activeDayIndex]
-            }
+            activeDay = days[activeDayIndex]
         }
 
 		return (
-			<div style={{width: '600px', margin: 'auto', border: '1px solid rgba(255, 255, 255, 0.6)', borderTop: null}}>
+			<div style={{width: '600px', margin: 'auto'}}>
                 {days.length >= 4 &&
                     <ForecastDays
                         days={days.slice(0, 4)}

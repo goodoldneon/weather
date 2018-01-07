@@ -90,7 +90,7 @@ class ForecastDays extends Component {
                             style={{
                                 borderLeft: (i !== 0 ? '1px solid rgba(255, 255, 255, 0.6)' : null),
                                 borderBottom: `1px solid ${isActiveDay ? 'transparent' : 'rgba(255, 255, 255, 0.6)'}`,
-                                background: `rgba(0, 0, 0, ${isActiveDay ? 0.2 : 0.5}`,
+                                background: `rgba(0, 0, 0, ${isActiveDay ? 0.4 : 0.7}`,
                             }}
                             key={i}
                         >
