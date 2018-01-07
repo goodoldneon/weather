@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Row, Col } from 'antd'
-import { format } from 'date-fns'
+import { format, isBefore, startOfToday, addDays } from 'date-fns'
 
 const getIconName = (icon) => {
     const iconTranslate = {
@@ -23,14 +23,26 @@ const getIconName = (icon) => {
 }
 
 class ForecastDay extends Component {
+    constructor() {
+        super()
+        this.state = {isHover: false}
+    }
+
 	render() {
         const day = this.props.data
+        const isToday = isBefore(day.time, addDays(startOfToday(), 1))
+        const isHover = this.state.isHover
         
 		return (
-            <div style={{padding: '10px'}}>
+            <div
+                onClick={this.props.onClick}
+                onMouseEnter={() => this.setState({isHover: true})}
+                onMouseLeave={() => this.setState({isHover: false})}
+                style={{padding: '10px', background: (isHover ? 'rgba(255, 255, 255, 0.2)' : null)}}
+            >
                 <div style={{display: 'flex', alignItems: 'center'}}>
                     <div style={{flexGrow: 1, fontSize: '1.2em'}}>
-                        {format(day.time, 'ddd')}
+                        {isToday ? 'Today' : format(day.time, 'ddd')}
                     </div>
 
                     <div style={{flexGrow: 1, fontSize: '1.2em', textAlign: 'right', color: 'rgba(255, 255, 255, 0.6)'}}>
@@ -68,22 +80,27 @@ class ForecastDay extends Component {
 class ForecastDays extends Component {
 	render() {
 		return (
-            <Row style={{borderBottom: '1px solid rgba(255, 255, 255, 0.6)'}}>
-                <Col span={6} style={{borderLeft: '1px solid rgba(255, 255, 255, 0.6)', borderRight: '1px solid rgba(255, 255, 255, 0.6)'}}>
-                    <ForecastDay data={this.props.data[0]} />
-                </Col>
+            <Row>
+                {this.props.days.map((day, i) => {
+                    const isActiveDay = (i === this.props.activeDayIndex)
 
-                <Col span={6} style={{borderRight: '1px solid rgba(255, 255, 255, 0.6)'}}>
-                    <ForecastDay data={this.props.data[1]} />
-                </Col>
-
-                <Col span={6} style={{borderRight: '1px solid rgba(255, 255, 255, 0.6)'}}>
-                    <ForecastDay data={this.props.data[2]} />
-                </Col>
-
-                <Col span={6} style={{borderRight: '1px solid rgba(255, 255, 255, 0.6)'}}>
-                    <ForecastDay data={this.props.data[3]} />
-                </Col>
+                    return (
+                        <Col
+                            span={6}
+                            style={{
+                                borderLeft: (i !== 0 ? '1px solid rgba(255, 255, 255, 0.6)' : null),
+                                borderBottom: `1px solid ${isActiveDay ? 'transparent' : 'rgba(255, 255, 255, 0.6)'}`,
+                                background: `rgba(0, 0, 0, ${isActiveDay ? 0.4 : 0.7}`,
+                            }}
+                            key={i}
+                        >
+                            <ForecastDay
+                                data={day}
+                                onClick={() => this.props.onChangeActiveDayIndex(i)}
+                            />
+                        </Col>
+                    )
+                })}
             </Row>
         )
   	}

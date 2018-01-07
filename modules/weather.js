@@ -48,9 +48,6 @@ const parseDay = (raw) => {
 const getData = async (lat, lng) => {
     const key = process.env.DARKSKY_API_KEY
 	const url = `https://api.darksky.net/forecast/${key}/${lat},${lng}?exclude=[minutely]&units=us`
-	
-	console.log(url)
-
     const res = await axios.get(url)
   
     if (res.status !== 200) {
@@ -60,7 +57,6 @@ const getData = async (lat, lng) => {
     }
 
 	const current = res.data.currently
-	// const forecast = [parseDay(res.data.daily.data[0])]
 	const days = []
 	const hours = []
 
@@ -88,7 +84,6 @@ const getData = async (lat, lng) => {
 				bearing: current.windBearing,
 			}
 		},
-		// forecast,
 		days: days,
 		hours: hours,
 	}

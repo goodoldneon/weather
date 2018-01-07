@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import '../css/weather-icons.min.css'
+import '../css/weather-icons-wind.min.css'
 
 import { ForecastDays } from './ForecastDays'
-import WeatherCurrent from './WeatherCurrent'
+// import WeatherCurrent from './WeatherCurrent'
+import WeatherActive from './WeatherActive'
 import HourlyChart from './HourlyChart'
 
 class MainContainer extends Component {
@@ -11,10 +13,11 @@ class MainContainer extends Component {
 		super()
 
 		this.state = {
-			location: {},
-			current: {},
+			location: null,
+			current: null,
 			days: [],
-			hours: [],
+            hours: [],
+            activeDayIndex: 0,
 		}
 	}
 
@@ -39,7 +42,7 @@ class MainContainer extends Component {
 			hours: res.data.hours,
 		})
 
-		console.log(res.data.days)
+		// console.log(res.data.days[0])
 	}
 
 	render() {
@@ -48,24 +51,37 @@ class MainContainer extends Component {
 				x: a.time,
 				y: a.temperature.actual,
 			}
-		})
+        })
+        
+        const days = this.state.days
+        const activeDayIndex = this.state.activeDayIndex
+        let activeDay = null
+        
+        // Make sure index doesn't go past array length.
+        if (activeDayIndex <= (days.length + 1)) {
+            activeDay = days[activeDayIndex]
+        }
 
 		return (
 			<div style={{width: '600px', margin: 'auto'}}>
-				<div>
-					{this.state.days.length >= 4 &&
-						<ForecastDays data={this.state.days} />
-					}
-				</div>
+                {days.length >= 4 &&
+                    <ForecastDays
+                        days={days.slice(0, 4)}
+                        activeDayIndex={activeDayIndex}
+                        onChangeActiveDayIndex={val => this.setState({activeDayIndex: val})}
+                    />
+                }
 
-				<div>
+                <WeatherActive data={activeDay} />
+
+				{/* <div>
 					{this.state.current !== undefined && this.state.days !== undefined &&
 						<WeatherCurrent
 							current={this.state.current}
 							day={this.state.days[0]}
 						/>
 					}
-				</div>
+				</div> */}
 
 				{/* <HourlyChart data={hourlyChartData} /> */}
 			</div>
