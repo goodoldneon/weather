@@ -2,11 +2,15 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import '../css/weather-icons.min.css'
 import '../css/weather-icons-wind.min.css'
+import { Input } from 'antd'
 
+// import LocationSearch from './LocationSearch'
 import WeatherCurrent from './WeatherCurrent'
 import { ForecastDays } from './ForecastDays'
 import WeatherActive from './WeatherActive'
 import HourlyChart from './HourlyChart'
+
+const Search = Input.Search
 
 class MainContainer extends Component {
 	constructor() {
@@ -27,14 +31,13 @@ class MainContainer extends Component {
 
 	getWeather = async (zip) => {
 		const url = `http://localhost:60001/api?zip=${zip}`
-
 		const res = await axios.get(url)
 
 		if (res.error) {
 			console.log(res.error.msg)
 			return
 		}
-
+console.log(res.data)
 		this.setState({
 			location: res.data.location,
 			current: res.data.current,
@@ -50,7 +53,8 @@ class MainContainer extends Component {
 				y: a.temperature.actual,
 			}
         })
-        
+		
+		const location = (this.state.location ? this.state.location.name : null)
         const current = this.state.current
         const days = this.state.days
         const activeDayIndex = this.state.activeDayIndex
@@ -60,7 +64,16 @@ class MainContainer extends Component {
 
 		return (
 			<div style={{width: '600px', margin: 'auto'}}>
-                <WeatherCurrent data={current} />
+				<Search
+					placeholder='Enter zip code'
+					enterButton='Search'
+					onSearch={value => this.getWeather(value)}
+				/>
+
+                <WeatherCurrent
+					data={current}
+					location={location}
+				/>
 
                 {days.length >= 4 &&
                     <ForecastDays

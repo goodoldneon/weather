@@ -15,8 +15,12 @@ class WeatherCurrent extends Component {
                     borderBottom: '2px solid rgba(255, 255, 255, 0.8)',
                     background: 'rgba(0, 0, 0, 0.3)',
                 }}>
-					<div style={{fontSize: '1.5em'}}>
-						Now
+					<div style={{display: 'flex', fontSize: '1.5em'}}>
+						<div>Now</div>
+						
+						<div style={{flexGrow: 1, textAlign: 'right'}}>
+							{this.props.location}
+						</div>
 					</div>
 
 					<div style={{display: 'flex', alignItems: 'center', textAlign: 'center'}}>

@@ -20,7 +20,7 @@ app.get('/'), (req, res) => {
 
 app.get('/api', async (req, res) => {
     const zip = req.query.zip
-    const shouldGetCached = true
+    const shouldGetCached = false
     let location
     let weatherData
 
