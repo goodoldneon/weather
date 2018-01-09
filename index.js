@@ -1,4 +1,5 @@
 const express = require('express')
+const bodyParser = require('body-parser')
 const fs = require('fs')
 const app = express()
 
@@ -9,10 +10,14 @@ app.set('port', process.env.PORT || 60001)
 
 // Allow CORS (cross-origin resource sharing).
 app.use(function(req, res, next) {
-    res.header('Access-Control-Allow-Origin', '*')
-    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept')
-    next()
+	res.header('Access-Control-Allow-Origin', '*')
+	res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE')
+	res.header('Access-Control-Allow-Headers', 'Content-Type')
+	next()
 })
+
+// parse application/json
+app.use(bodyParser.json())
 
 app.get('/', (req, res) => {
     
@@ -32,8 +37,8 @@ app.get('/api/location', async (req, res) => {
 	res.status(200).send(locations)
 })
 
-app.get('/api/weather', async (req, res) => {
-	const location = JSON.parse(req.query.location)
+app.post('/api/weather', async (req, res) => {
+	const location = req.body
     const shouldGetCached = false
     let weatherData
 

@@ -7,19 +7,21 @@ const Search = Input.Search
 class LocationSearch extends Component {
 	constructor () {
 		super()
+
 		this.state = {
-			autoCompleteData: []
+			results: []
 		}
 	}
 
 	handleSelect (value) {
-		this.props.onSelectSearch(value)
-		this.setState({autoCompleteData: []})
+		const location = this.state.results[value]
+		this.props.onSelectSearch(location)
+		this.setState({results: []})
 	}
 
 	getLocations = async (text) => {
 		// Don't search if auto complete data exists. This prevents searching location when user is trying to select a value in the auto complete dropdown.
-		if (this.state.autoCompleteData.length > 0) {
+		if (this.state.results.length > 0) {
 			return
 		}
 
@@ -31,30 +33,34 @@ class LocationSearch extends Component {
 			return
 		}
 
-		// Populates auto complete list below the search input.
-		const autoCompleteData = res.data.map(a => {
+		const results = res.data.map(a => {
 			return {
-				text: a.name,
-				value: JSON.stringify({
-					lat: a.lat,
-					lng: a.lng,
-					name: a.name,
-				}),
+				name: a.name,
+				lat: a.lat,
+				lng: a.lng,
 			}
 		})
 
 		this.setState({
-			autoCompleteData: autoCompleteData
+			results: results
 		})
 	}
 
 	render() {
+		// Convert search results into an object used to display results to the user.
+		const autoCompleteData = this.state.results.map((a, i) => {
+			return {
+				text: a.name,
+				value: i,
+			}
+		})
+
 		return (
 			<div>
 				<AutoComplete
 					placeholder='Enter location'
 					enterButton='Search'
-					dataSource={this.state.autoCompleteData}
+					dataSource={autoCompleteData}
 					onSelect={value => this.handleSelect(value)}
 					style={{width: '100%'}}
 				>

@@ -24,18 +24,18 @@ class MainContainer extends Component {
 
 	componentWillMount() {
 		// Location on initial page load.
-		const locationDefault = JSON.stringify({
+		const locationDefault = {
+			name: 'Ann Arbor, MI 48105, USA',
 			lat: 42.3295957,
 			lng: -83.7092861,
-			name: 'Ann Arbor, MI 48105, USA',
-		})
+		}
 
 		this.getWeather(locationDefault)
 	}
 
 	getWeather = async (location) => {
-		const url = `http://localhost:60001/api/weather?location=${location}`
-		const res = await axios.get(url)
+		const url = `http://localhost:60001/api/weather`
+		const res = await axios.post(url, location)
 
 		if (res.error) {
 			console.log(res.error.msg)
@@ -69,7 +69,7 @@ class MainContainer extends Component {
 		return (
 			<div style={{width: '600px', margin: 'auto'}}>
 				<LocationSearch
-					onSelectSearch={value => this.getWeather(value)}
+					onSelectSearch={location => this.getWeather(location)}
 				/>
 
                 <WeatherCurrent
