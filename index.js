@@ -14,35 +14,35 @@ app.use(function(req, res, next) {
     next()
 })
 
-app.get('/'), (req, res) => {
+app.get('/', (req, res) => {
     
-}
+})
 
-app.get('/api', async (req, res) => {
-    const zip = req.query.zip
-    const shouldGetCached = true
-    let location
+app.get('/api/location', async (req, res) => {
+	const text = req.query.text
+	const locations = await geocode.getLocations(text)
+
+    if (locations.error) {
+        console.log(locations.error.msg)
+        return res.status(500).send({
+            error: locations.error
+        })
+	}
+
+	res.status(200).send(locations)
+})
+
+app.get('/api/weather', async (req, res) => {
+	const location = JSON.parse(req.query.location)
+    const shouldGetCached = false
     let weatherData
 
     if (shouldGetCached) {
-        location = JSON.parse(fs.readFileSync('./data/location.json'))
         weatherData = JSON.parse(fs.readFileSync('./data/weather.json'))
     } else {
-        location = await geocode.getPointFromZip(zip)
-    }
-
-    if (location.error) {
-        console.log(location.error.msg)
-        return res.status(500).send({
-            error: location.error
-        })
-    }
-
-    if (!shouldGetCached) {
         weatherData = await weather.getData(location.lat, location.lng)
     }
 
-    fs.writeFileSync('./data/location.json', JSON.stringify(location) , 'utf-8')
     fs.writeFileSync('./data/weather.json', JSON.stringify(weatherData) , 'utf-8')
 
     res.status(200).send({

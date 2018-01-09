@@ -3,10 +3,11 @@ import axios from 'axios'
 import '../css/weather-icons.min.css'
 import '../css/weather-icons-wind.min.css'
 
+import LocationSearch from './LocationSearch'
 import WeatherCurrent from './WeatherCurrent'
 import { ForecastDays } from './ForecastDays'
 import WeatherActive from './WeatherActive'
-import HourlyChart from './HourlyChart'
+// import HourlyChart from './HourlyChart'
 
 class MainContainer extends Component {
 	constructor() {
@@ -22,12 +23,18 @@ class MainContainer extends Component {
 	}
 
 	componentWillMount() {
-		this.getWeather(48105)
+		// Location on initial page load.
+		const locationDefault = JSON.stringify({
+			lat: 42.3295957,
+			lng: -83.7092861,
+			name: 'Ann Arbor, MI 48105, USA',
+		})
+
+		this.getWeather(locationDefault)
 	}
 
-	getWeather = async (zip) => {
-		const url = `http://localhost:60001/api?zip=${zip}`
-
+	getWeather = async (location) => {
+		const url = `http://localhost:60001/api/weather?location=${location}`
 		const res = await axios.get(url)
 
 		if (res.error) {
@@ -44,13 +51,14 @@ class MainContainer extends Component {
 	}
 
 	render() {
-		const hourlyChartData = this.state.hours.map(a => {
-			return {
-				x: a.time,
-				y: a.temperature.actual,
-			}
-        })
-        
+		// const hourlyChartData = this.state.hours.map(a => {
+		// 	return {
+		// 		x: a.time,
+		// 		y: a.temperature.actual,
+		// 	}
+        // })
+		
+		const location = (this.state.location ? this.state.location.name : null)
         const current = this.state.current
         const days = this.state.days
         const activeDayIndex = this.state.activeDayIndex
@@ -60,7 +68,14 @@ class MainContainer extends Component {
 
 		return (
 			<div style={{width: '600px', margin: 'auto'}}>
-                <WeatherCurrent data={current} />
+				<LocationSearch
+					onSelectSearch={value => this.getWeather(value)}
+				/>
+
+                <WeatherCurrent
+					data={current}
+					location={location}
+				/>
 
                 {days.length >= 4 &&
                     <ForecastDays

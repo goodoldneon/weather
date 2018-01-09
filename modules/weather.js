@@ -46,15 +46,15 @@ const parseDay = (raw) => {
 }
 
 const getData = async (lat, lng) => {
-    const key = process.env.DARKSKY_API_KEY
+	const key = process.env.DARKSKY_API_KEY
 	const url = `https://api.darksky.net/forecast/${key}/${lat},${lng}?exclude=[minutely]&units=us`
-    const res = await axios.get(url)
-  
-    if (res.status !== 200) {
-      console.log(`Weather not found for zip "${zip}"`)
-  
-      return {}
-    }
+	const res = await axios.get(url)
+
+	if (res.status !== 200) {
+		console.log(`Weather not found for zip "${zip}"`)
+
+		return {}
+	}
 
 	const current = res.data.currently
 	const days = []
@@ -68,8 +68,8 @@ const getData = async (lat, lng) => {
 		hours.push(parseHour(hour))
 	}
 
-    return {
-        current: {
+	return {
+		current: {
 			summary: current.summary,
 			icon: current.icon,
 			temperature: {

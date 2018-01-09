@@ -2,7 +2,7 @@ const getIconName = (icon) => {
 	const iconTranslate = {
 		'clear-day': 'day-sunny',
 		'clear-night': 'night-clear',
-		rain: 'raindrop',
+		rain: 'rain',
 		snow: 'snow',
 		sleet: 'sleet',
 		wind: 'windy',
