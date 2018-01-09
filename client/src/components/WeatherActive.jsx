@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { Row, Col } from 'antd'
-import styled from 'styled-components'
 import { format } from 'date-fns'
 
 import { getIconName } from './common/icon.js'
@@ -9,7 +8,6 @@ import { Label, Value } from './common/style'
 class WeatherActive extends Component {
 	render() {
         const data = this.props.data
-        const colorFade = 'rgba(255, 255, 255, 0.6)'
 
         if (data) {
             return (

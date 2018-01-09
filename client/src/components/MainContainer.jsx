@@ -2,15 +2,12 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import '../css/weather-icons.min.css'
 import '../css/weather-icons-wind.min.css'
-import { Input } from 'antd'
 
-// import LocationSearch from './LocationSearch'
+import LocationSearch from './LocationSearch'
 import WeatherCurrent from './WeatherCurrent'
 import { ForecastDays } from './ForecastDays'
 import WeatherActive from './WeatherActive'
-import HourlyChart from './HourlyChart'
-
-const Search = Input.Search
+// import HourlyChart from './HourlyChart'
 
 class MainContainer extends Component {
 	constructor() {
@@ -26,18 +23,25 @@ class MainContainer extends Component {
 	}
 
 	componentWillMount() {
-		this.getWeather(48105)
+		// Location on initial page load.
+		const locationDefault = JSON.stringify({
+			lat: 42.3295957,
+			lng: -83.7092861,
+			name: 'Ann Arbor, MI 48105, USA',
+		})
+
+		this.getWeather(locationDefault)
 	}
 
-	getWeather = async (zip) => {
-		const url = `http://localhost:60001/api?zip=${zip}`
+	getWeather = async (location) => {
+		const url = `http://localhost:60001/api/weather?location=${location}`
 		const res = await axios.get(url)
 
 		if (res.error) {
 			console.log(res.error.msg)
 			return
 		}
-console.log(res.data)
+
 		this.setState({
 			location: res.data.location,
 			current: res.data.current,
@@ -47,12 +51,12 @@ console.log(res.data)
 	}
 
 	render() {
-		const hourlyChartData = this.state.hours.map(a => {
-			return {
-				x: a.time,
-				y: a.temperature.actual,
-			}
-        })
+		// const hourlyChartData = this.state.hours.map(a => {
+		// 	return {
+		// 		x: a.time,
+		// 		y: a.temperature.actual,
+		// 	}
+        // })
 		
 		const location = (this.state.location ? this.state.location.name : null)
         const current = this.state.current
@@ -64,10 +68,8 @@ console.log(res.data)
 
 		return (
 			<div style={{width: '600px', margin: 'auto'}}>
-				<Search
-					placeholder='Enter zip code'
-					enterButton='Search'
-					onSearch={value => this.getWeather(value)}
+				<LocationSearch
+					onSelectSearch={value => this.getWeather(value)}
 				/>
 
                 <WeatherCurrent

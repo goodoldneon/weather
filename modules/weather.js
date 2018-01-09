@@ -49,7 +49,7 @@ const getData = async (lat, lng) => {
 	const key = process.env.DARKSKY_API_KEY
 	const url = `https://api.darksky.net/forecast/${key}/${lat},${lng}?exclude=[minutely]&units=us`
 	const res = await axios.get(url)
-	console.log(url)
+
 	if (res.status !== 200) {
 		console.log(`Weather not found for zip "${zip}"`)
 
