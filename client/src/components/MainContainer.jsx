@@ -5,9 +5,9 @@ import '../css/weather-icons-wind.min.css'
 
 import LocationSearch from './LocationSearch'
 import WeatherCurrent from './WeatherCurrent'
+import SunChart from './SunChart'
 import { ForecastDays } from './ForecastDays'
 import WeatherActive from './WeatherActive'
-// import HourlyChart from './HourlyChart'
 
 class MainContainer extends Component {
 	constructor() {
@@ -30,6 +30,8 @@ class MainContainer extends Component {
 			lng: -83.7092861,
 		}
 
+		this.setState({location: locationDefault})
+
 		this.getWeather(locationDefault)
 	}
 
@@ -43,7 +45,7 @@ class MainContainer extends Component {
 		}
 
 		this.setState({
-			location: res.data.location,
+			// location: res.data.location,
 			current: res.data.current,
 			days: res.data.days,
 			hours: res.data.hours,
@@ -51,14 +53,7 @@ class MainContainer extends Component {
 	}
 
 	render() {
-		// const hourlyChartData = this.state.hours.map(a => {
-		// 	return {
-		// 		x: a.time,
-		// 		y: a.temperature.actual,
-		// 	}
-        // })
-		
-		const location = (this.state.location ? this.state.location.name : null)
+		const location = this.state.location
         const current = this.state.current
         const days = this.state.days
         const activeDayIndex = this.state.activeDayIndex
@@ -72,10 +67,19 @@ class MainContainer extends Component {
 					onSelectSearch={location => this.getWeather(location)}
 				/>
 
-                <WeatherCurrent
-					data={current}
-					location={location}
-				/>
+				<div style={{borderBottom: '2px solid rgba(255, 255, 255, 0.8)'}}>
+					<WeatherCurrent
+						data={current}
+						locationName={location.name}
+					/>
+				</div>
+
+				<div style={{borderBottom: '2px solid rgba(255, 255, 255, 0.8)'}}>
+					<SunChart
+						lat={location.lat}
+						lng={location.lng}
+					/>
+				</div>
 
                 {days.length >= 4 &&
                     <ForecastDays
