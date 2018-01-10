@@ -76,7 +76,7 @@ class SunChart extends Component {
 				name: null,
 				type: 'area',
 				color: '#FDC754',
-				negativeColor: '#514197',
+				negativeColor: '#101046',
 				marker: {
 					enabled: false
 				},
@@ -98,12 +98,7 @@ class SunChart extends Component {
 		]
 
 		return (
-			<div style={{
-				padding: '10px',
-				background: 'rgba(0, 0, 0, 0.3)',
-			}}>
-				<ReactHighcharts config={config}></ReactHighcharts>
-			</div>
+			<ReactHighcharts config={config}></ReactHighcharts>
 		)
 	}
 }

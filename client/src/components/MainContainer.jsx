@@ -5,7 +5,6 @@ import '../css/weather-icons-wind.min.css'
 
 import LocationSearch from './LocationSearch'
 import WeatherCurrent from './WeatherCurrent'
-import SunChart from './SunChart'
 import { ForecastDays } from './ForecastDays'
 import WeatherActive from './WeatherActive'
 
@@ -70,14 +69,7 @@ class MainContainer extends Component {
 				<div style={{borderBottom: '2px solid rgba(255, 255, 255, 0.8)'}}>
 					<WeatherCurrent
 						data={current}
-						locationName={location.name}
-					/>
-				</div>
-
-				<div style={{borderBottom: '2px solid rgba(255, 255, 255, 0.8)'}}>
-					<SunChart
-						lat={location.lat}
-						lng={location.lng}
+						location={location}
 					/>
 				</div>
 

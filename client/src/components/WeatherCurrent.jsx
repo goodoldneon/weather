@@ -1,12 +1,30 @@
 import React, { Component } from 'react'
 import { Row, Col } from 'antd'
 
+import SunChart from './SunChart'
 import { getIconName } from './common/icon'
 import { Label, Value } from './common/style'
 
 class WeatherCurrent extends Component {
-	render() {
-        const data = this.props.data
+	constructor () {
+		super()
+
+		this.state = {
+			isSunChartVisible: false
+		}
+
+		this.toggleSunChart = this.toggleSunChart.bind(this)
+	}
+
+	toggleSunChart (e) {
+		e.preventDefault()
+		this.setState({isSunChartVisible: !this.state.isSunChartVisible})
+	}
+
+	render () {
+		const location = this.props.location
+		const data = this.props.data
+		const isSunChartVisible = this.state.isSunChartVisible
 
         if (data) {
             return (
@@ -59,6 +77,41 @@ class WeatherCurrent extends Component {
 					<div style={{fontSize: '1.5em', textAlign: 'center'}}>
                         {data.summary}
                     </div>
+
+					<div style={{
+						margin: '10px',
+						borderBottom: '1px solid rgba(255, 255, 255, 0.6)'
+					}} />
+
+					<div>
+						<a href='#'
+							onClick={this.toggleSunChart}
+							style={{
+								color: '#FFFFFF',
+								textDecoration: 'none'
+							}}
+						>
+							<div
+								style={{
+									marginLeft: '10px',
+									marginRight: '10px'
+								}}
+							>
+								<span>Sun Height</span>
+
+								<span style={{float: 'right'}}>
+									{isSunChartVisible ? '(Hide)' : '(Show)'}
+								</span>
+							</div>
+						</a>
+
+						{isSunChartVisible &&
+							<SunChart
+								lat={location.lat}
+								lng={location.lng}
+							/>
+						}
+					</div>
                 </div>
             )
         } else {
