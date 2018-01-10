@@ -6670,6 +6670,10 @@ stylis@^3.4.0:
   version "3.4.5"
   resolved "https://registry.yarnpkg.com/stylis/-/stylis-3.4.5.tgz#d7b9595fc18e7b9c8775eca8270a9a1d3e59806e"
 
+"suncalc@https://github.com/mourner/suncalc":
+  version "1.8.0"
+  resolved "https://github.com/mourner/suncalc#b08d1f6f8e56a3c0d85469d6cf0ff8675cba40a5"
+
 supports-color@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/supports-color/-/supports-color-2.0.0.tgz#535d045ce6b6363fa40117084629995e9df324c7"
