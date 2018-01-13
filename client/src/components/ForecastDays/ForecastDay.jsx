@@ -1,80 +1,102 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { format, isBefore, startOfToday, addDays } from 'date-fns'
+import styled from 'styled-components'
 
 import { getIconName } from '../common/icon'
 
-class ForecastDay extends Component {
-    constructor() {
-        super()
-        this.state = {isHover: false}
-    }
+const Wrapper = styled.div`
+	padding: 10px;
+	:hover {
+		background: rgba(255, 255, 255, 0.1);
+	}
+`
 
+const Row = styled.div`
+	display: flex;
+	align-items: center;
+`
+
+const DayName = styled.div`
+	flex-grow: 1;
+	font-size: 1.2em;
+`
+
+const Date = styled.div`
+	flex-grow: 1;
+	font-size: 1.2em;
+	text-align: right;
+	color: rgba(255, 255, 255, 0.6);
+`
+
+const HorizontalSeparator = styled.div`
+	border-bottom: 1px solid rgba(255, 255, 255, 0.6);
+	margin: 10px;
+`
+
+const Condition = styled.div`
+	flex-grow: 1;
+	font-size: 1.8em;
+`
+
+const Precip = styled.div`
+	flex-grow: 1;
+	font-size: 1.2em;
+	text-align: right;
+`
+
+const TempHigh = styled.div`
+	flex-grow: 1;
+	font-size: 1.6em;
+`
+
+const TempLow = styled.div`
+	flex-grow: 1;
+	font-size: 1.6em;
+	text-align: right;
+	color: rgba(255, 255, 255, 0.6);
+`
+
+class ForecastDay extends Component {
 	render() {
         const day = this.props.data
         const isToday = isBefore(day.time, addDays(startOfToday(), 1))
-        const isHover = this.state.isHover
-        
+		const dayName = (isToday ? 'Today' : format(day.time, 'ddd'))
+		const date = format(day.time, 'MMM D')
+		
 		return (
-            <div
-                onClick={this.props.onClick}
-                onMouseEnter={() => this.setState({isHover: true})}
-                onMouseLeave={() => this.setState({isHover: false})}
-                style={{padding: '10px', background: (isHover ? 'rgba(255, 255, 255, 0.1)' : null)}}
-            >
-                <div style={{display: 'flex', alignItems: 'center'}}>
-                    <div style={{flexGrow: 1, fontSize: '1.2em'}}>
-                        {isToday ? 'Today' : format(day.time, 'ddd')}
-                    </div>
+            <Wrapper onClick={this.props.onClick}>
+                <Row>
+                    <DayName>{dayName}</DayName>
+                    <Date>{date}</Date>
+                </Row>
 
-                    <div style={{
-						flexGrow: 1,
-						fontSize: '1.2em',
-						textAlign: 'right',
-						color: 'rgba(255, 255, 255, 0.6)'
-					}}>
-                        {format(day.time, 'MMM D')}
-                    </div>
-                </div>
+                <HorizontalSeparator />
 
-                <div style={{
-					borderBottom: '1px solid rgba(255, 255, 255, 0.6)',
-					margin: '10px'
-				}} />
-
-                <div style={{display: 'flex', alignItems: 'center', marginBottom: '10px'}}>
-                    <div style={{flexGrow: 1, fontSize: '1.8em'}}>
+                <Row style={{marginBottom: '10px'}}>
+                    <Condition>
                         <i className={`wi ${getIconName(day.icon)}`} />
-                    </div>
+                    </Condition>
 
-                    <div style={{
-						flexGrow: 1,
-						fontSize: '1.2em',
-						textAlign: 'right'
-					}}>
-                        <i className={'wi wi-raindrop'} style={{paddingRight: '5px'}} />
-                        {Math.round(day.precip.probability * 100)}%
-                    </div>
-                </div>
+                    <Precip>
+                        <i className={'wi wi-raindrop'} />
 
-                <div style={{
-					display: 'flex',
-					alignItems: 'center',
-					fontSize: '1.6em'
-				}}>
-                    <div style={{flexGrow: 1}}>
+						<span style={{paddingLeft: '5px'}}>
+							{Math.round(day.precip.probability * 100)}%
+						</span>
+                    </Precip>
+                </Row>
+
+                <Row>
+                    <TempHigh>
                         {Math.round(day.temperature.actual.high)}&deg;
-                    </div>
+                    </TempHigh>
                         
-                    <div style={{
-						flexGrow: 1,
-						textAlign: 'right',
-						color: 'rgba(255, 255, 255, 0.6)'
-					}}>
+                    <TempLow>
                         {Math.round(day.temperature.actual.low)}&deg;
-                    </div>
-                </div>
-            </div>
+                    </TempLow>
+                </Row>
+            </Wrapper>
         )
   	}
 }

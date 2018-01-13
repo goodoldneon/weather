@@ -14,13 +14,13 @@ class ForecastDays extends Component {
 
                     return (
                         <Col
-                            span={6}
+							span={6}
+							key={i}
                             style={{
                                 borderLeft: (i !== 0 ? '2px solid rgba(255, 255, 255, 0.8)' : null),
                                 borderBottom: `2px solid ${bgColor}`,
                                 background: `rgba(0, 0, 0, ${isActiveDay ? 0.3 : 0.7}`,
                             }}
-                            key={i}
                         >
                             <ForecastDay
                                 data={day}

@@ -1,49 +1,4 @@
 module.exports = {
-	// "extends": "airbnb-base",
-    // "parserOptions": {
-    //     "ecmaFeatures": {
-    //         "jsx": true,
-    //     },
-    // },
-    // "rules": {
-	// 	"no-tabs": 0,
-    //     "indent": ["error", "tab"],
-	// 	"semi": ["error", "never"],
-	// 	"space-before-function-paren": ["error", "never"],
-	// },
-	// "plugins": [
-	// 	"react",
-	// ],
-	
-
-
-	// "plugins": [
-	// 	"react"
-	// ],
-	// "parserOptions": {
-	// 	"ecmaVersion": 6,
-	// 	"sourceType": "module",
-	// 	"ecmaFeatures": {
-	// 		"jsx": true
-	// 	}
-	// },
-	// "env": {
-	// 	"es6":     true,
-	// 	"browser": true,
-	// 	"node":    true,
-	// },   
-	// "extends": [
-	// 	"eslint:recommended", 
-	// 	"plugin:react/recommended"
-	// ],    
-	// "rules": {
-	// 	"no-tabs": 0,
-	// 	"indent": ["error", "tab"],
-	// 	"semi": ["error", "never"],
-	// 	"space-before-function-paren": ["error", "never"],
-	// }
-
-
 	"ecmaFeatures": {
 		"jsx": true,
 		"modules": true
@@ -79,6 +34,7 @@ module.exports = {
 		  "anonymous": "always",
 		  "named": "never"
 		}],
+		"prefer-const": "error",
 		"strict": [2, "global"]
 	  },
 	  "plugins": [

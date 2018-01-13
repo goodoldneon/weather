@@ -21,13 +21,9 @@ class LocationSearch extends Component {
 	}
 
 	getLocations = async (text) => {
-		/*
-			Don't search if auto complete data exists.
+		const doesAutoCompleteDataAlreadyExist = (this.state.results.length > 0)
 
-			This prevents searching location when user is trying to select a value in the 
-			auto complete dropdown.
-		*/
-		if (this.state.results.length > 0) {
+		if (doesAutoCompleteDataAlreadyExist) {
 			return
 		}
 
