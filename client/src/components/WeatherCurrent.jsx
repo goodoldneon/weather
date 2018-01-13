@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { Row, Col } from 'antd'
 
 import SunChart from './SunChart'
@@ -6,7 +7,7 @@ import { getIconName } from './common/icon'
 import { Label, Value } from './common/style'
 
 class WeatherCurrent extends Component {
-	constructor () {
+	constructor() {
 		super()
 
 		this.state = {
@@ -16,12 +17,12 @@ class WeatherCurrent extends Component {
 		this.toggleSunChart = this.toggleSunChart.bind(this)
 	}
 
-	toggleSunChart (e) {
+	toggleSunChart(e) {
 		e.preventDefault()
 		this.setState({isSunChartVisible: !this.state.isSunChartVisible})
 	}
 
-	render () {
+	render() {
 		const location = this.props.location
 		const data = this.props.data
 		const isSunChartVisible = this.state.isSunChartVisible
@@ -36,12 +37,17 @@ class WeatherCurrent extends Component {
 						<div>Now</div>
 						
 						<div style={{flexGrow: 1, textAlign: 'right'}}>
-							{this.props.locationName}
+							{location.name}
 						</div>
 					</div>
 
 					<div style={{display: 'flex', alignItems: 'center', textAlign: 'center'}}>
-						<div style={{flexGrow: 1, marginLeft: '10px', marginRight: '10px', fontSize: '5em'}}>
+						<div style={{
+							flexGrow: 1,
+							marginLeft: '10px',
+							marginRight: '10px',
+							fontSize: '5em'
+						}}>
 							<i className={`wi ${getIconName(data.icon)}`} />
 						</div>
 
@@ -84,7 +90,7 @@ class WeatherCurrent extends Component {
 					}} />
 
 					<div>
-						<a href='#'
+						<a href="#"
 							onClick={this.toggleSunChart}
 							style={{
 								color: '#FFFFFF',
@@ -120,6 +126,11 @@ class WeatherCurrent extends Component {
             )
         }
   	}
+}
+
+WeatherCurrent.propTypes = {
+	data: PropTypes.object,
+	location: PropTypes.object,
 }
 
 export default WeatherCurrent

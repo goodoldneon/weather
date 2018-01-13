@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { Row, Col } from 'antd'
 import { format } from 'date-fns'
 
@@ -14,7 +15,7 @@ class WeatherActive extends Component {
                 <div style={{padding: '10px', paddingTop: 0, background: 'rgba(0, 0, 0, 0.3'}}>
                     <div style={{display: 'flex', alignItems: 'center', textAlign: 'center'}}>
                         <div style={{width: '20%', fontSize: '5em'}}>
-                            <i className={`wi ${getIconName(data.icon)}`}></i>
+                            <i className={`wi ${getIconName(data.icon)}`} />
                         </div>
 
                         <div style={{width: '80%'}}>
@@ -75,6 +76,10 @@ class WeatherActive extends Component {
             )
         }
     }
+}
+
+WeatherActive.propTypes = {
+	data: PropTypes.object,
 }
 
 export default WeatherActive

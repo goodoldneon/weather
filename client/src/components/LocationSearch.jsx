@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import axios from 'axios'
 import { Input, AutoComplete } from 'antd'
 
 const Search = Input.Search
 
 class LocationSearch extends Component {
-	constructor () {
+	constructor() {
 		super()
 
 		this.state = {
@@ -13,14 +14,19 @@ class LocationSearch extends Component {
 		}
 	}
 
-	handleSelect (value) {
+	handleSelect(value) {
 		const location = this.state.results[value]
 		this.props.onSelectSearch(location)
 		this.setState({results: []})
 	}
 
 	getLocations = async (text) => {
-		// Don't search if auto complete data exists. This prevents searching location when user is trying to select a value in the auto complete dropdown.
+		/*
+			Don't search if auto complete data exists.
+
+			This prevents searching location when user is trying to select a value in the 
+			auto complete dropdown.
+		*/
 		if (this.state.results.length > 0) {
 			return
 		}
@@ -58,20 +64,24 @@ class LocationSearch extends Component {
 		return (
 			<div>
 				<AutoComplete
-					placeholder='Enter location'
-					enterButton='Search'
+					placeholder={'Enter location'}
+					enterButton={'Search'}
 					dataSource={autoCompleteData}
 					onSelect={value => this.handleSelect(value)}
 					style={{width: '100%'}}
 				>
 					<Search
-						enterButton='Search'
+						enterButton={'Search'}
 						onSearch={this.getLocations}
 					/>
 				</AutoComplete>
 			</div>
 		)
 	}
+}
+
+LocationSearch.propTypes = {
+	onSelectSearch: PropTypes.func,
 }
 
 export default LocationSearch

@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import sunCalc from 'suncalc'
 import { format, addHours } from 'date-fns'
 import ReactHighcharts from 'react-highcharts'
@@ -98,9 +99,14 @@ class SunChart extends Component {
 		]
 
 		return (
-			<ReactHighcharts config={config}></ReactHighcharts>
+			<ReactHighcharts config={config} />
 		)
 	}
+}
+
+SunChart.propTypes = {
+	lat: PropTypes.number,
+	lng: PropTypes.number,
 }
 
 export default SunChart

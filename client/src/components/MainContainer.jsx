@@ -5,7 +5,7 @@ import '../css/weather-icons-wind.min.css'
 
 import LocationSearch from './LocationSearch'
 import WeatherCurrent from './WeatherCurrent'
-import { ForecastDays } from './ForecastDays'
+import ForecastDays from './ForecastDays/ForecastDays'
 import WeatherActive from './WeatherActive'
 
 class MainContainer extends Component {
@@ -30,12 +30,11 @@ class MainContainer extends Component {
 		}
 
 		this.setState({location: locationDefault})
-
 		this.getWeather(locationDefault)
 	}
 
 	getWeather = async (location) => {
-		const url = `http://localhost:60001/api/weather`
+		const url = 'http://localhost:60001/api/weather'
 		const res = await axios.post(url, location)
 
 		if (res.error) {
