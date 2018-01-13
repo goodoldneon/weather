@@ -90,7 +90,7 @@ class WeatherCurrent extends Component {
 					}} />
 
 					<div>
-						<a href="#"
+						<a
 							onClick={this.toggleSunChart}
 							style={{
 								color: '#FFFFFF',

@@ -89,9 +89,9 @@ class SunChart extends Component {
 				marker: {
 					symbol: 'circle',
 					radius: 15,
-					fillColor: '#FE8C51',
-					lineColor: '#FF654B',
-					lineWidth: 2
+					fillColor: '#FDC754',
+					lineColor: '#000000',
+					lineWidth: 3
 				},
 				animation: false,
 				data: now

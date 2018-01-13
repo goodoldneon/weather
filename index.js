@@ -51,9 +51,6 @@ app.post('/api/weather', async (req, res) => {
     fs.writeFileSync('./data/weather.json', JSON.stringify(weatherData) , 'utf-8')
 
     res.status(200).send({
-        location: {
-            name: location.name,
-        },
         current: weatherData.current,
         days: weatherData.days,
         hours: weatherData.hours,

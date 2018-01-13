@@ -43,7 +43,7 @@ class MainContainer extends Component {
 		}
 
 		this.setState({
-			// location: res.data.location,
+			location: location,
 			current: res.data.current,
 			days: res.data.days,
 			hours: res.data.hours,

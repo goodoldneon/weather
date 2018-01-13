@@ -67,11 +67,13 @@ class LocationSearch extends Component {
 					placeholder={'Enter location'}
 					enterButton={'Search'}
 					dataSource={autoCompleteData}
+					size={'large'}
 					onSelect={value => this.handleSelect(value)}
 					style={{width: '100%'}}
 				>
 					<Search
 						enterButton={'Search'}
+						size={'large'}
 						onSearch={this.getLocations}
 					/>
 				</AutoComplete>
