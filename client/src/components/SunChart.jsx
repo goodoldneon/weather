@@ -81,7 +81,13 @@ class SunChart extends Component {
 				marker: {
 					enabled: false
 				},
+				lineWidth: 0,
 				animation: false,
+				states: {
+					hover: {
+						lineWidthPlus: 0,
+					},
+				},
 				data: hours
 			},
 			{
@@ -91,7 +97,7 @@ class SunChart extends Component {
 					radius: 15,
 					fillColor: '#FDC754',
 					lineColor: '#000000',
-					lineWidth: 3
+					lineWidth: 2
 				},
 				animation: false,
 				data: now

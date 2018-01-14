@@ -10,15 +10,15 @@ class ForecastDays extends Component {
             <Row>
                 {this.props.days.map((day, i) => {
 					const isActiveDay = (i === this.props.activeDayIndex)
-					const bgColor = (isActiveDay ? 'transparent' : 'rgba(255, 255, 255, 0.8)')
+					const bgColor = (isActiveDay ? 'transparent' : '#ffffff')
 
                     return (
                         <Col
 							span={6}
 							key={i}
                             style={{
-                                borderLeft: (i !== 0 ? '2px solid rgba(255, 255, 255, 0.8)' : null),
-                                borderBottom: `2px solid ${bgColor}`,
+                                borderLeft: (i !== 0 ? '1px solid #ffffff' : null),
+                                borderBottom: `1px solid ${bgColor}`,
                                 background: `rgba(0, 0, 0, ${isActiveDay ? 0.3 : 0.7}`,
                             }}
                         >

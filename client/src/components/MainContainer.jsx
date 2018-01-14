@@ -1,12 +1,22 @@
 import React, { Component } from 'react'
+import styled from 'styled-components'
 import axios from 'axios'
 import '../css/weather-icons.min.css'
 import '../css/weather-icons-wind.min.css'
 
 import LocationSearch from './LocationSearch'
 import WeatherCurrent from './WeatherCurrent'
-import ForecastDays from './ForecastDays/ForecastDays'
+import ForecastDays from './ForecastDays'
 import WeatherActive from './WeatherActive'
+
+const Wrapper = styled.div`
+	width: 600px;
+	margin: auto;
+`
+
+const HorizontalSeparator = styled.div`
+	border-bottom: 1px solid #ffffff;
+`
 
 class MainContainer extends Component {
 	constructor() {
@@ -57,20 +67,20 @@ class MainContainer extends Component {
         const activeDayIndex = this.state.activeDayIndex
 
         // Make sure index doesn't go past array length.
-        let activeDay = (activeDayIndex <= (days.length + 1)) ? days[activeDayIndex] : null
+        const activeDay = (activeDayIndex <= (days.length + 1)) ? days[activeDayIndex] : null
 
 		return (
-			<div style={{width: '600px', margin: 'auto'}}>
+			<Wrapper>
 				<LocationSearch
 					onSelectSearch={location => this.getWeather(location)}
 				/>
 
-				<div style={{borderBottom: '2px solid rgba(255, 255, 255, 0.8)'}}>
-					<WeatherCurrent
-						data={current}
-						location={location}
-					/>
-				</div>
+				<WeatherCurrent
+					data={current}
+					location={location}
+				/>
+
+				<HorizontalSeparator />
 
                 {days.length >= 4 &&
                     <ForecastDays
@@ -81,7 +91,7 @@ class MainContainer extends Component {
                 }
 
                 <WeatherActive data={activeDay} />
-			</div>
+			</Wrapper>
 		)
   	}
 }
