@@ -19,7 +19,7 @@ class LocationSearch extends Component {
 		this.state = {
 			value: '',
 			results: [],
-			isSearching: false
+			isSearching: false,
 		}
 	}
 
@@ -28,7 +28,7 @@ class LocationSearch extends Component {
 
 		this.setState({
 			value,
-			results: []
+			results: [],
 		})
 	}
 
@@ -59,13 +59,13 @@ class LocationSearch extends Component {
 			return {
 				name: a.name,
 				lat: a.lat,
-				lng: a.lng
+				lng: a.lng,
 			}
 		})
 
 		this.setState({
 			results: results,
-			isSearching: false
+			isSearching: false,
 		})
 	}
 

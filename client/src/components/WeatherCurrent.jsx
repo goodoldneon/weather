@@ -1,18 +1,63 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { Row, Col } from 'antd'
+import styled from 'styled-components'
+import { Row, Col, Collapse } from 'antd'
 
 import SunChart from './SunChart'
 import { getIconName } from './common/icon'
-import { Label, Value } from './common/style'
+import { Label, Value, HorizontalSeparator } from './common/style'
+
+const Panel = Collapse.Panel
+
+const Wrapper = styled.div`
+	padding: 10px;
+`
+
+const Location = styled.div`
+	display: flex;
+	font-size: 1.5em;
+`
+
+const Condition = styled.div`
+	display: flex;
+	align-items: center;
+	text-align: center;
+`
+
+const ConditionIcon = styled.div`
+	flex-grow: 1;
+	margin-left: 10px;
+	margin-right: 10px;
+	font-size: 5em;
+`
+
+const Temperature = styled.div`
+	flex-grow: 1;
+	font-size: 5em;
+`
+
+const Detail = styled.div`
+	flex-grow: 10;
+`
+
+const Summary = styled.div`
+	font-size: 1.5em;
+	text-align: center;
+`
+
+const SunChartSection = styled(Collapse)`
+	background: transparent;
+	
+	div, i {
+		color: #ffffff !important;
+	}
+`
 
 class WeatherCurrent extends Component {
 	constructor() {
 		super()
 
-		this.state = {
-			isSunChartVisible: false
-		}
+		this.state = {isSunChartVisible: false}
 
 		this.toggleSunChart = this.toggleSunChart.bind(this)
 	}
@@ -29,30 +74,27 @@ class WeatherCurrent extends Component {
 
         if (data) {
             return (
-                <div style={{padding: '10px'}}>
-					<div style={{display: 'flex', fontSize: '1.5em'}}>
-						<div>Now</div>
+                <Wrapper>
+					<Location>
+						<div style={{flexGrow: 1}}>
+							Now
+						</div>
 						
-						<div style={{flexGrow: 1, textAlign: 'right'}}>
+						<div style={{flexGrow: 6, textAlign: 'right'}}>
 							{location.name}
 						</div>
-					</div>
+					</Location>
 
-					<div style={{display: 'flex', alignItems: 'center', textAlign: 'center'}}>
-						<div style={{
-							flexGrow: 1,
-							marginLeft: '10px',
-							marginRight: '10px',
-							fontSize: '5em'
-						}}>
+					<Condition>
+						<ConditionIcon>
 							<i className={`wi ${getIconName(data.icon)}`} />
-						</div>
+						</ConditionIcon>
 
-						<div style={{flexGrow: 1, fontSize: '5em'}}>
+						<Temperature>
 							{Math.round(data.temperature.actual)}&deg;F
-						</div>
+						</Temperature>
 
-						<div style={{flexGrow: 10}}>
+						<Detail>
 							<Row style={{marginBottom: '5px'}}>
 								<Col span={6}>
 									<Label>Feels Like</Label>
@@ -74,48 +116,27 @@ class WeatherCurrent extends Component {
 									<Value>{Math.round(data.humidity * 100)}%</Value>
 								</Col>
 							</Row>
-						</div>
-					</div>
+						</Detail>
+					</Condition>
 
-					<div style={{fontSize: '1.5em', textAlign: 'center'}}>
+					<Summary>
                         {data.summary}
-                    </div>
+                    </Summary>
 
-					<div style={{
-						margin: '10px',
-						borderBottom: '1px solid rgba(255, 255, 255, 0.6)'
-					}} />
+					<HorizontalSeparator />
 
-					<div>
-						<a
-							onClick={this.toggleSunChart}
-							style={{
-								color: '#FFFFFF',
-								textDecoration: 'none'
-							}}
+					<SunChartSection bordered={false}>
+						<Panel
+							header="Sun Height"
+							style={{border: 0}}
 						>
-							<div
-								style={{
-									marginLeft: '10px',
-									marginRight: '10px'
-								}}
-							>
-								<span>Sun Height</span>
-
-								<span style={{float: 'right'}}>
-									{isSunChartVisible ? '(Hide)' : '(Show)'}
-								</span>
-							</div>
-						</a>
-
-						{isSunChartVisible &&
 							<SunChart
 								lat={location.lat}
 								lng={location.lng}
 							/>
-						}
-					</div>
-                </div>
+						</Panel>
+					</SunChartSection>
+                </Wrapper>
             )
         } else {
             return (

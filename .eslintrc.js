@@ -37,6 +37,7 @@ module.exports = {
 		"prefer-const": "error",
 		"strict": [2, "global"],
 		"semi": [2, "never"],
+		"comma-dangle": ["error", "always-multiline"],
 	},
 	"plugins": [
 		"react",

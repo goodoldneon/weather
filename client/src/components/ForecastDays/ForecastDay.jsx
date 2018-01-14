@@ -4,6 +4,7 @@ import { format, isBefore, startOfToday, addDays } from 'date-fns'
 import styled from 'styled-components'
 
 import { getIconName } from '../common/icon'
+import { HorizontalSeparator } from '../common/style'
 
 const Wrapper = styled.div`
 	padding: 10px;
@@ -27,11 +28,6 @@ const Date = styled.div`
 	font-size: 1.2em;
 	text-align: right;
 	color: rgba(255, 255, 255, 0.6);
-`
-
-const HorizontalSeparator = styled.div`
-	border-bottom: 1px solid rgba(255, 255, 255, 0.6);
-	margin: 10px;
 `
 
 const Condition = styled.div`

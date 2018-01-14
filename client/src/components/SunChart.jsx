@@ -5,39 +5,39 @@ import { format, addHours } from 'date-fns'
 import ReactHighcharts from 'react-highcharts'
 
 // Highcharts config object.
-let config = {
+const config = {
     chart: {
 		height: '200px',
 		backgroundColor: 'transparent',
 		margin: [0, 0, 0, 0],
-		animation: false
+		animation: false,
 	},
 	legend: {
-		enabled: false
+		enabled: false,
 	},
 	credits: {
-		enabled: false
+		enabled: false,
 	},
     title: {
-        text: null
+        text: null,
     },
     xAxis: {
 		type: 'datetime',
         labels: {
-            enabled: false
+            enabled: false,
 		},
 		gridLineWidth: 0,
 		lineWidth: 0,
-		tickWidth: 0
+		tickWidth: 0,
     },
     yAxis: {
         title: {
-            text: null
+            text: null,
         },
         labels: {
-            enabled: false
+            enabled: false,
         },
-		gridLineWidth: 0
+		gridLineWidth: 0,
     },
     tooltip: {
         formatter: function () {
@@ -45,10 +45,10 @@ let config = {
 				${Number(this.y).toFixed(2)} radians
 				<br />
 				${this.series.name === 'Now' ? 'Now' : format(this.x, 'h:mm a')}
-			`;
-        }
+			`
+        },
     },
-    series: []
+    series: [],
 }
 
 class SunChart extends Component {
@@ -63,13 +63,13 @@ class SunChart extends Component {
 
 			hours.push({
 				x: time.getTime(),
-				y: sunCalc.getPosition(time, this.props.lat, this.props.lng).altitude
+				y: sunCalc.getPosition(time, this.props.lat, this.props.lng).altitude,
 			})
 		}
 
 		const now = [{
 			x: timeNow,
-			y: sunCalc.getPosition(timeNow, this.props.lat, this.props.lng).altitude
+			y: sunCalc.getPosition(timeNow, this.props.lat, this.props.lng).altitude,
 		}]
 
 		config.series = [
@@ -79,7 +79,7 @@ class SunChart extends Component {
 				color: '#FDC754',
 				negativeColor: '#101046',
 				marker: {
-					enabled: false
+					enabled: false,
 				},
 				lineWidth: 0,
 				animation: false,
@@ -88,7 +88,7 @@ class SunChart extends Component {
 						lineWidthPlus: 0,
 					},
 				},
-				data: hours
+				data: hours,
 			},
 			{
 				name: 'Now',
@@ -97,11 +97,11 @@ class SunChart extends Component {
 					radius: 15,
 					fillColor: '#FDC754',
 					lineColor: '#000000',
-					lineWidth: 2
+					lineWidth: 2,
 				},
 				animation: false,
-				data: now
-			}
+				data: now,
+			},
 		]
 
 		return (
