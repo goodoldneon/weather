@@ -7,6 +7,11 @@ import { format } from 'date-fns'
 import { getIconName } from './common/icon.js'
 import { Label, Value } from './common/style'
 
+const Wrapper = styled.div`
+	padding: 10px;
+	padding-top: 0;
+`
+
 const ConditionIcon = styled.div`
 	width: 20%;
 	font-size: 5em;
@@ -27,7 +32,7 @@ class WeatherActive extends Component {
 
         if (data) {
             return (
-                <div style={{padding: '10px', paddingTop: 0}}>
+                <Wrapper>
                     <div style={{display: 'flex', alignItems: 'center', textAlign: 'center'}}>
                         <ConditionIcon>
                             <i className={`wi ${getIconName(data.icon)}`} />
@@ -83,7 +88,7 @@ class WeatherActive extends Component {
                     <Summary>
                         {data.summary}
                     </Summary>
-                </div>
+                </Wrapper>
             )
         } else {
             return (

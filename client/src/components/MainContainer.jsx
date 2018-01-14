@@ -33,7 +33,6 @@ class MainContainer extends Component {
 	}
 
 	componentWillMount() {
-		// Location on initial page load.
 		const locationDefault = {
 			name: 'Ann Arbor, MI 48105, USA',
 			lat: 42.3295957,
