@@ -9,7 +9,7 @@ const weather = require('./modules/weather')
 app.set('port', process.env.PORT || 60001)
 
 // Allow CORS (cross-origin resource sharing).
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
 	res.header('Access-Control-Allow-Origin', '*')
 	res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE')
 	res.header('Access-Control-Allow-Headers', 'Content-Type')
@@ -19,10 +19,6 @@ app.use(function(req, res, next) {
 // parse application/json
 app.use(bodyParser.json())
 
-app.get('/', (req, res) => {
-    
-})
-
 app.get('/api/location', async (req, res) => {
 	const text = req.query.text
 	const locations = await geocode.getLocations(text)
@@ -30,7 +26,7 @@ app.get('/api/location', async (req, res) => {
     if (locations.error) {
         console.log(locations.error.msg)
         return res.status(500).send({
-            error: locations.error
+            error: locations.error,
         })
 	}
 
@@ -57,4 +53,6 @@ app.post('/api/weather', async (req, res) => {
     })
 })
 
-app.listen(app.get('port'), () => console.log(`Weather API is listening on port ${app.get('port')}`))
+app.listen(app.get('port'), () => {
+	console.log(`Weather API is listening on port ${app.get('port')}`)
+})

@@ -38,8 +38,9 @@ module.exports = {
 		"strict": [2, "global"],
 		"semi": [2, "never"],
 		"comma-dangle": ["error", "always-multiline"],
+		"no-unused-vars": "error",
 	},
 	"plugins": [
 		"react",
-	]
+	],
 };

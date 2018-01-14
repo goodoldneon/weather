@@ -54,23 +54,9 @@ const SunChartSection = styled(Collapse)`
 `
 
 class WeatherCurrent extends Component {
-	constructor() {
-		super()
-
-		this.state = {isSunChartVisible: false}
-
-		this.toggleSunChart = this.toggleSunChart.bind(this)
-	}
-
-	toggleSunChart(e) {
-		e.preventDefault()
-		this.setState({isSunChartVisible: !this.state.isSunChartVisible})
-	}
-
 	render() {
 		const location = this.props.location
 		const data = this.props.data
-		const isSunChartVisible = this.state.isSunChartVisible
 
         if (data) {
             return (

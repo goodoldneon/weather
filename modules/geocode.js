@@ -22,18 +22,16 @@ const getLocations = async (text) => {
     if (res.status !== 200) {
 		return {
 			error: {
-				msg: `Zip "${zip}" not found`
-			}
+				msg: `Zip "${zip}" not found`,
+			},
 		}
     } else if (res.data.error_message) {
 		return {
 			error: {
-				msg: res.data.error_message
-			}
+				msg: res.data.error_message,
+			},
 		}
     }
-
-    const data = res.data.results[0]
 
 	return res.data.results.map(result => {
 		return {

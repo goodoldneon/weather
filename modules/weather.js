@@ -60,11 +60,11 @@ const getData = async (lat, lng) => {
 	const days = []
 	const hours = []
 
-	for (let day of res.data.daily.data) {
+	for (const day of res.data.daily.data) {
 		days.push(parseDay(day))
 	}
 
-	for (let hour of res.data.hourly.data) {
+	for (const hour of res.data.hourly.data) {
 		hours.push(parseHour(hour))
 	}
 
@@ -82,7 +82,7 @@ const getData = async (lat, lng) => {
 				speed: current.windSpeed,
 				gust: current.windGust,
 				bearing: current.windBearing,
-			}
+			},
 		},
 		days: days,
 		hours: hours,
@@ -90,5 +90,5 @@ const getData = async (lat, lng) => {
 }
 
 module.exports = {
-	getData
+	getData,
 }
