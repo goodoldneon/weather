@@ -12,6 +12,7 @@ import WeatherActive from './WeatherActive'
 const Wrapper = styled.div`
 	width: 600px;
 	margin: auto;
+	background: rgba(0, 0, 0, 0.3);
 `
 
 const HorizontalSeparator = styled.div`

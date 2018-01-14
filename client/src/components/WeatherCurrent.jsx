@@ -29,10 +29,7 @@ class WeatherCurrent extends Component {
 
         if (data) {
             return (
-                <div style={{
-                    padding: '10px',
-                    background: 'rgba(0, 0, 0, 0.3)',
-                }}>
+                <div style={{padding: '10px'}}>
 					<div style={{display: 'flex', fontSize: '1.5em'}}>
 						<div>Now</div>
 						

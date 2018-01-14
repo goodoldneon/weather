@@ -19,7 +19,7 @@ class ForecastDays extends Component {
                             style={{
                                 borderLeft: (i !== 0 ? '1px solid #ffffff' : null),
                                 borderBottom: `1px solid ${bgColor}`,
-                                background: `rgba(0, 0, 0, ${isActiveDay ? 0.3 : 0.7}`,
+                                background: (isActiveDay ? null : 'rgba(0, 0, 0, 0.3)'),
                             }}
                         >
                             <ForecastDay

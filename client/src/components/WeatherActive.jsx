@@ -1,10 +1,25 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import styled from 'styled-components'
 import { Row, Col } from 'antd'
 import { format } from 'date-fns'
 
 import { getIconName } from './common/icon.js'
 import { Label, Value } from './common/style'
+
+const ConditionIcon = styled.div`
+	width: 20%;
+	font-size: 5em;
+`
+
+const Detail = styled.div`
+	width: 80%;
+`
+
+const Summary = styled.div`
+	font-size: 1.5em;
+	text-align: center;
+`
 
 class WeatherActive extends Component {
 	render() {
@@ -12,13 +27,13 @@ class WeatherActive extends Component {
 
         if (data) {
             return (
-                <div style={{padding: '10px', paddingTop: 0, background: 'rgba(0, 0, 0, 0.3'}}>
+                <div style={{padding: '10px', paddingTop: 0}}>
                     <div style={{display: 'flex', alignItems: 'center', textAlign: 'center'}}>
-                        <div style={{width: '20%', fontSize: '5em'}}>
+                        <ConditionIcon>
                             <i className={`wi ${getIconName(data.icon)}`} />
-                        </div>
+                        </ConditionIcon>
 
-                        <div style={{width: '80%'}}>
+                        <Detail>
                             <Row style={{marginBottom: '5px'}}>
                                 <Col span={6}>
                                     <Label>High</Label>
@@ -62,12 +77,12 @@ class WeatherActive extends Component {
                                     <Value>{format(data.sunset, 'h:mm')}</Value>
                                 </Col>
                             </Row>
-                        </div>
+                        </Detail>
                     </div>
 
-                    <div style={{fontSize: '1.5em', textAlign: 'center'}}>
+                    <Summary>
                         {data.summary}
-                    </div>
+                    </Summary>
                 </div>
             )
         } else {

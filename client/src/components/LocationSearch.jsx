@@ -1,17 +1,35 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import styled from 'styled-components'
 import axios from 'axios'
 import { Input, AutoComplete } from 'antd'
 
 const Search = Input.Search
+
+const Wrapper = styled.div`
+	input {
+		border-radius: 0;
+	}
+`
 
 class LocationSearch extends Component {
 	constructor() {
 		super()
 
 		this.state = {
-			results: []
+			value: '',
+			results: [],
+			isSearching: false
 		}
+	}
+
+	handleChange(value) {
+		value = (value === '0' ? '' : value)
+
+		this.setState({
+			value,
+			results: []
+		})
 	}
 
 	handleSelect(value) {
@@ -27,6 +45,8 @@ class LocationSearch extends Component {
 			return
 		}
 
+		this.setState({isSearching: true})
+
 		const url = `http://localhost:60001/api/location?text=${text}`
 		const res = await axios.get(url)
 
@@ -39,12 +59,13 @@ class LocationSearch extends Component {
 			return {
 				name: a.name,
 				lat: a.lat,
-				lng: a.lng,
+				lng: a.lng
 			}
 		})
 
 		this.setState({
-			results: results
+			results: results,
+			isSearching: false
 		})
 	}
 
@@ -58,22 +79,23 @@ class LocationSearch extends Component {
 		})
 
 		return (
-			<div>
+			<Wrapper>
 				<AutoComplete
-					placeholder={'Enter location'}
-					enterButton={'Search'}
+					value={this.state.value}
+					placeholder={'Search for location'}
 					dataSource={autoCompleteData}
 					size={'large'}
+					disabled={this.state.isSearching}
+					onChange={value => this.handleChange(value)}
 					onSelect={value => this.handleSelect(value)}
 					style={{width: '100%'}}
 				>
 					<Search
-						enterButton={'Search'}
 						size={'large'}
 						onSearch={this.getLocations}
 					/>
 				</AutoComplete>
-			</div>
+			</Wrapper>
 		)
 	}
 }

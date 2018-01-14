@@ -1,15 +1,15 @@
 module.exports = {
 	"ecmaFeatures": {
 		"jsx": true,
-		"modules": true
-	  },
-	  "env": {
+		"modules": true,
+	},
+	"env": {
 		"browser": true,
 		"es6": true,
-		"node": true
-	  },
-	  "parser": "babel-eslint",
-	  "rules": {
+		"node": true,
+	},
+	"parser": "babel-eslint",
+	"rules": {
 		"eol-last": 2,
 		"max-len": [2, 100, 4],
 		"no-underscore-dangle": [0],
@@ -31,13 +31,14 @@ module.exports = {
 		"react/jsx-wrap-multilines": 2,
 		"quotes": [2, "single"],
 		"space-before-function-paren": [2, {
-		  "anonymous": "always",
-		  "named": "never"
+			"anonymous": "always",
+			"named": "never",
 		}],
 		"prefer-const": "error",
-		"strict": [2, "global"]
-	  },
-	  "plugins": [
-		"react"
-	  ]
+		"strict": [2, "global"],
+		"semi": [2, "never"],
+	},
+	"plugins": [
+		"react",
+	]
 };
