@@ -12,6 +12,8 @@ const Wrapper = styled.div`
 	}
 `
 
+const WAIT_INTERVAL = 1000
+
 class LocationSearch extends Component {
 	constructor() {
 		super()
@@ -19,17 +21,20 @@ class LocationSearch extends Component {
 		this.state = {
 			value: '',
 			results: [],
-			isSearching: false,
 		}
 	}
 
 	handleChange(value) {
+		clearTimeout(this.timer)
 		value = (value === '0' ? '' : value)
 
 		this.setState({
 			value,
 			results: [],
 		})
+
+		// Debounce changes to prevent excessive API calls.
+		this.timer = setTimeout(() => this.getLocations(value), WAIT_INTERVAL)
 	}
 
 	handleSelect(value) {
@@ -40,12 +45,11 @@ class LocationSearch extends Component {
 
 	getLocations = async (text) => {
 		const doesAutoCompleteDataAlreadyExist = (this.state.results.length > 0)
+		const isNoText = (text === undefined || text.length === 0)
 
-		if (doesAutoCompleteDataAlreadyExist) {
+		if (doesAutoCompleteDataAlreadyExist || isNoText) {
 			return
 		}
-
-		this.setState({isSearching: true})
 
 		const url = `http://localhost:60001/api/location?text=${text}`
 		const res = await axios.get(url)
@@ -65,7 +69,7 @@ class LocationSearch extends Component {
 
 		this.setState({
 			results: results,
-			isSearching: false,
+			// isSearching: false,
 		})
 	}
 
@@ -85,7 +89,6 @@ class LocationSearch extends Component {
 					placeholder={'Search for location'}
 					dataSource={autoCompleteData}
 					size={'large'}
-					disabled={this.state.isSearching}
 					onChange={value => this.handleChange(value)}
 					onSelect={value => this.handleSelect(value)}
 					style={{width: '100%'}}
