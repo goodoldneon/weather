@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import axios from 'axios'
-import { Input, AutoComplete } from 'antd'
+import { Input, AutoComplete, Modal } from 'antd'
 
 const Search = Input.Search
 
@@ -13,6 +13,13 @@ const Wrapper = styled.div`
 `
 
 const WAIT_INTERVAL = 1000
+
+const modalError = (title, content) => {
+	Modal.error({
+	  title,
+	  content,
+	})
+  }
 
 class LocationSearch extends Component {
 	constructor() {
@@ -52,10 +59,22 @@ class LocationSearch extends Component {
 		}
 
 		const url = `http://localhost:60001/api/location?text=${text}`
-		const res = await axios.get(url)
+		let res = null
+
+		try {
+			res = await axios.get(url)
+		} catch (error) {
+			res = {
+				error: {
+					msg: error.message,
+				},
+			}
+		}
 
 		if (res.error) {
-			console.log(res.error.msg)
+			const title = 'Server error'
+			const content = res.error.msg
+			modalError(title, content)
 			return
 		}
 
