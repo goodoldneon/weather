@@ -131,7 +131,7 @@ class WeatherCurrent extends Component {
 
 					<CollapseStyled bordered={false}>
 						<Panel
-							header={<PanelHeader>Hours</PanelHeader>}
+							header={<PanelHeader>Hourly Conditions</PanelHeader>}
 							style={{border: 0}}
 						>
 							<Hourly data={hours} />

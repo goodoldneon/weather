@@ -5,36 +5,7 @@ import { format, isBefore, startOfToday, addDays } from 'date-fns'
 
 import { getIconName } from './common/icon'
 
-// const data = [
-// 	{
-// 		time: new Date(0).setUTCSeconds(1516467600),
-// 		summary: 'Clear',
-// 		icon: 'clear-day',
-// 		precip: 0.5,
-// 		wind: 10.35,
-// 		temperature: 41.2,
-// 	},
-// 	{
-// 		time: new Date(0).setUTCSeconds(1516471200),
-// 		summary: 'Rain',
-// 		icon: 'rain',
-// 		precip: 0,
-// 		wind: 5,
-// 		temperature: 45,
-// 	},
-// 	{
-// 		time: new Date(0).setUTCSeconds(1516640400),
-// 		summary: 'Rain',
-// 		icon: 'rain',
-// 		precip: 0,
-// 		wind: 5,
-// 		temperature: 45,
-// 	},
-// ]
-
 const Wrapper = styled.div`
-	padding-left: 10px;
-	padding-right: 10px;
 	color: #ffffff;
 `
 
@@ -76,9 +47,37 @@ const Day = styled.div`
 	color: rgba(255,255,255,0.6);
 `
 
+const ExpandToggle = styled.div`
+	padding-top: 20px;
+	text-align: center;
+	
+	a {
+		color: #ffffff;
+	}
+
+	a:hover {
+		color: #ffffff;
+	}
+`
+
 class Hourly extends Component {
+	constructor() {
+		super()
+
+		this.state = {
+			areRowsLimited: true,
+		}
+	}
+
+	toggleRowLimit() {
+		const areRowsLimited = this.state.areRowsLimited
+		this.setState({areRowsLimited: !areRowsLimited})
+	}
+	
 	render() {
-		const data = this.props.data.slice(0, 24)
+		const areRowsLimited = this.state.areRowsLimited
+		const maxRows = (areRowsLimited ? 8 : 24)
+		const data = this.props.data.slice(0, maxRows)
 		const timeFormat = 'h a'
 
 		if (data.length === 0) {
@@ -106,20 +105,9 @@ class Hourly extends Component {
 								const isToday = isBefore(a.time, addDays(startOfToday(), 1))
 								const day = (isToday ? 'Today' : format(a.time, 'dddd'))
 								const time = format(a.time, timeFormat)
-								const isLastRow = (i === (data.length - 1))
-								let rowStyle = {}
-
-								if (isLastRow) {
-									rowStyle = {
-										borderWidth: 0,
-									}
-								}
 
 								return (
-									<tr
-										key={i}
-										style={rowStyle}
-									>
+									<tr key={i}>
 										<td style={{textAlign: 'left'}}>
 											<div>{time}</div>
 											<Day>{day}</Day>
@@ -133,22 +121,20 @@ class Hourly extends Component {
 											</span>
 										</td>
 
-										<td>
-											<i className={'wi wi-raindrop'} />
-
-											<span style={{paddingLeft: '5px'}}>
-												{Math.round(a.precip * 100)}%
-											</span>
-										</td>
-
+										<td>{Math.round(a.precip * 100)}%</td>
 										<td>{Math.round(a.wind)} mph</td>
-
 										<td>{Math.round(a.temperature)}&deg;</td>
 									</tr>
 								)
 							})}
 						</tbody>
 					</Table>
+
+					<ExpandToggle>
+						<a onClick={() => this.toggleRowLimit()}>
+							{areRowsLimited ? 'View all hours' : 'View less hours'}
+						</a>
+					</ExpandToggle>
 				</Wrapper>
 			)
 		}
