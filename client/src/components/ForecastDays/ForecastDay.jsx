@@ -8,8 +8,9 @@ import { HorizontalSeparator } from '../common/style'
 
 const Wrapper = styled.div`
 	padding: 10px;
+
 	:hover {
-		background: rgba(255, 255, 255, 0.1);
+		${props => !props.isActiveDay ? 'background: rgba(255, 255, 255, 0.1)' : ''};
 	}
 `
 
@@ -59,9 +60,12 @@ class ForecastDay extends Component {
         const isToday = isBefore(day.time, addDays(startOfToday(), 1))
 		const dayName = (isToday ? 'Today' : format(day.time, 'ddd'))
 		const date = format(day.time, 'MMM D')
-		
+
 		return (
-            <Wrapper onClick={this.props.onClick}>
+			<Wrapper
+				onClick={this.props.onClick}
+				isActiveDay={this.props.isActiveDay}
+			>
                 <Row>
                     <DayName>{dayName}</DayName>
                     <Date>{date}</Date>
@@ -99,6 +103,7 @@ class ForecastDay extends Component {
 
 ForecastDay.propTypes = {
 	data: PropTypes.object,
+	isActiveDay: PropTypes.bool,
 	onClick: PropTypes.func,
 }
 
