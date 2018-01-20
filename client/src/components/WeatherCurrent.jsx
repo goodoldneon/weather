@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import { Row, Col, Collapse } from 'antd'
 
 import SunChart from './SunChart'
+import Hourly from './Hourly'
 import { getIconName } from './common/icon'
 import { Label, Value, HorizontalSeparator } from './common/style'
 
@@ -45,20 +46,25 @@ const Summary = styled.div`
 	text-align: center;
 `
 
-const SunChartSection = styled(Collapse)`
+const CollapseStyled = styled(Collapse)`
 	background: transparent;
 	
-	div, i {
-		color: #ffffff !important;
+	i {
+		color: #ffffff;
 	}
+`
+
+const PanelHeader = styled.span`
+	color: #ffffff;
 `
 
 class WeatherCurrent extends Component {
 	render() {
 		const location = this.props.location
-		const data = this.props.data
+		const current = this.props.current
+		const hours = this.props.hours
 
-        if (data) {
+        if (current) {
             return (
                 <Wrapper>
 					<Location>
@@ -73,47 +79,47 @@ class WeatherCurrent extends Component {
 
 					<Condition>
 						<ConditionIcon>
-							<i className={`wi ${getIconName(data.icon)}`} />
+							<i className={`wi ${getIconName(current.icon)}`} />
 						</ConditionIcon>
 
 						<Temperature>
-							{Math.round(data.temperature.actual)}&deg;F
+							{Math.round(current.temperature.actual)}&deg;F
 						</Temperature>
 
 						<Detail>
 							<Row style={{marginBottom: '5px'}}>
 								<Col span={6}>
 									<Label>Feels Like</Label>
-									<Value>{Math.round(data.temperature.apparent)}&deg;</Value>
+									<Value>{Math.round(current.temperature.apparent)}&deg;</Value>
 								</Col>
 
 								<Col span={6}>
 									<Label>Wind</Label>
-									<Value>{Math.round(data.wind.speed)} mph</Value>
+									<Value>{Math.round(current.wind.speed)} mph</Value>
 								</Col>
 
 								<Col span={6}>
 									<Label>Gust</Label>
-									<Value>{Math.round(data.wind.gust)} mph</Value>
+									<Value>{Math.round(current.wind.gust)} mph</Value>
 								</Col>
 
 								<Col span={6}>
 									<Label>Humidity</Label>
-									<Value>{Math.round(data.humidity * 100)}%</Value>
+									<Value>{Math.round(current.humidity * 100)}%</Value>
 								</Col>
 							</Row>
 						</Detail>
 					</Condition>
 
 					<Summary>
-                        {data.summary}
+                        {current.summary}
                     </Summary>
 
 					<HorizontalSeparator />
 
-					<SunChartSection bordered={false}>
+					<CollapseStyled bordered={false}>
 						<Panel
-							header="Sun Height"
+							header={<PanelHeader>Sun Height</PanelHeader>}
 							style={{border: 0}}
 						>
 							<SunChart
@@ -121,7 +127,16 @@ class WeatherCurrent extends Component {
 								lng={location.lng}
 							/>
 						</Panel>
-					</SunChartSection>
+					</CollapseStyled>
+
+					<CollapseStyled bordered={false}>
+						<Panel
+							header={<PanelHeader>Hours</PanelHeader>}
+							style={{border: 0}}
+						>
+							<Hourly data={hours} />
+						</Panel>
+					</CollapseStyled>
                 </Wrapper>
             )
         } else {
@@ -133,8 +148,9 @@ class WeatherCurrent extends Component {
 }
 
 WeatherCurrent.propTypes = {
-	data: PropTypes.object,
 	location: PropTypes.object,
+	current: PropTypes.object,
+	hours: PropTypes.arrayOf(PropTypes.object),
 }
 
 export default WeatherCurrent

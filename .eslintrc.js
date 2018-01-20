@@ -39,6 +39,8 @@ module.exports = {
 		"semi": [2, "never"],
 		"comma-dangle": ["error", "always-multiline"],
 		"no-unused-vars": "error",
+		"no-use-before-define": "error",
+		"no-undef": "error",
 	},
 	"plugins": [
 		"react",

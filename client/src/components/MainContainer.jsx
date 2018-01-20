@@ -63,6 +63,7 @@ class MainContainer extends Component {
 	render() {
 		const location = this.state.location
         const current = this.state.current
+        const hours = this.state.hours
         const days = this.state.days
         const activeDayIndex = this.state.activeDayIndex
 
@@ -76,8 +77,9 @@ class MainContainer extends Component {
 				/>
 
 				<WeatherCurrent
-					data={current}
 					location={location}
+					current={current}
+					hours={hours}
 				/>
 
 				<HorizontalSeparator />
