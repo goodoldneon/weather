@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import sunCalc from 'suncalc'
-import { format, addHours } from 'date-fns'
+import { format, addMinutes } from 'date-fns'
 import ReactHighcharts from 'react-highcharts'
 
 // Highcharts config object.
@@ -54,14 +54,18 @@ const config = {
 class SunChart extends Component {
 	render() {
 		const timeNow = new Date()
-		let time
-		const hours = []
+		const data = []
+		let time = null
+		const hourLimitPlusMinus = 12
+		const pointsPerHour = 6
+		const iterStart = -1 * hourLimitPlusMinus * pointsPerHour
+		const iterStop = hourLimitPlusMinus * pointsPerHour
 
 		// Iterate hourly from +/- 12 hours around current time.
-		for (let i = -12; i <= 12; i++) {
-			time = addHours(timeNow, i)
+		for (let i = iterStart; i <= iterStop; i++) {
+			time = addMinutes(timeNow, i * 60 / pointsPerHour)
 
-			hours.push({
+			data.push({
 				x: time.getTime(),
 				y: sunCalc.getPosition(time, this.props.lat, this.props.lng).altitude,
 			})
@@ -88,7 +92,7 @@ class SunChart extends Component {
 						lineWidthPlus: 0,
 					},
 				},
-				data: hours,
+				data: data,
 			},
 			{
 				name: 'Now',
