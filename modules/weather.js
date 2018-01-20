@@ -5,9 +5,17 @@ const axios = require('axios')
 const parseHour = (raw) => {
 	return {
 		time: new Date(0).setUTCSeconds(raw.time),
+		icon: raw.icon,
 		temperature: {
 			actual: raw.temperature,
 			apparent: raw.apparentTemperature,
+		},
+		precip: {
+			type: raw.precipType,
+			probability: raw.precipProbability,
+		},
+		wind: {
+			speed: raw.windSpeed,
 		},
 	}
 }
