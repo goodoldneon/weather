@@ -23,7 +23,8 @@ class ForecastDays extends Component {
                             }}
                         >
                             <ForecastDay
-                                data={day}
+								data={day}
+								isActiveDay={isActiveDay}
                                 onClick={() => this.props.onChangeActiveDayIndex(i)}
                             />
                         </Col>
