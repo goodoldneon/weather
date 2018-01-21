@@ -19,6 +19,8 @@ app.use(function (req, res, next) {
 // parse application/json
 app.use(bodyParser.json())
 
+app.use('/', express.static('client/build'))
+
 app.get('/api/location', async (req, res) => {
 	const text = req.query.text
 	const locations = await geocode.getLocations(text)
