@@ -19,7 +19,7 @@ app.use(function (req, res, next) {
 // parse application/json
 app.use(bodyParser.json())
 
-app.use('/', express.static('client/build'))
+app.use('/', express.static(__dirname + '/client/build'))
 
 app.get('/api/location', async (req, res) => {
 	const text = req.query.text
@@ -38,15 +38,17 @@ app.get('/api/location', async (req, res) => {
 app.post('/api/weather', async (req, res) => {
 	const location = req.body
     const shouldGetCached = false
-    let weatherData
+    let weatherData = {}
 
     if (shouldGetCached) {
-        weatherData = JSON.parse(fs.readFileSync('./data/weather.json'))
+        weatherData = JSON.parse(fs.readFileSync(__dirname + '/data/weather.json'))
     } else {
         weatherData = await weather.getData(location.lat, location.lng)
     }
 
-    fs.writeFileSync('./data/weather.json', JSON.stringify(weatherData) , 'utf-8')
+	if (fs.existsSync(__dirname + '/data')) {
+		fs.writeFileSync(__dirname + '/data/weather.json', JSON.stringify(weatherData) , 'utf-8')
+	}
 
     res.status(200).send({
         current: weatherData.current,
