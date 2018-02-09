@@ -4,6 +4,7 @@ import axios from 'axios'
 import '../css/weather-icons.min.css'
 import '../css/weather-icons-wind.min.css'
 
+import { API_ROOT } from './../api-config'
 import LocationSearch from './LocationSearch'
 import WeatherCurrent from './WeatherCurrent'
 import ForecastDays from './ForecastDays'
@@ -44,7 +45,7 @@ class MainContainer extends Component {
 	}
 
 	getWeather = async (location) => {
-		const url = 'http://localhost:60001/api/weather'
+		const url = `${API_ROOT}/weather`
 		const res = await axios.post(url, location)
 
 		if (res.error) {
