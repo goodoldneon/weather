@@ -1,0 +1,16 @@
+{
+	"printWidth": 100,
+	"parser": "flow",
+	"overrides": [
+		{
+			"files": "*.{js,jsx}",
+			"options": {
+				"semi": false,
+				"useTabs": true,
+				"tabWidth": 4,
+				"singleQuote": true,
+				"trailingComma": "es5"
+			}
+    	}
+  	]
+}

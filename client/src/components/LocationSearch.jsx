@@ -18,10 +18,10 @@ const WAIT_INTERVAL = 1000
 
 const modalError = (title, content) => {
 	Modal.error({
-	  title,
-	  content,
+		title,
+		content,
 	})
-  }
+}
 
 class LocationSearch extends Component {
 	constructor() {
@@ -35,7 +35,7 @@ class LocationSearch extends Component {
 
 	handleChange(value) {
 		clearTimeout(this.timer)
-		value = (value === '0' ? '' : value)
+		value = value === '0' ? '' : value
 
 		this.setState({
 			value,
@@ -49,12 +49,12 @@ class LocationSearch extends Component {
 	handleSelect(value) {
 		const location = this.state.results[value]
 		this.props.onSelectSearch(location)
-		this.setState({results: []})
+		this.setState({ results: [] })
 	}
 
-	getLocations = async (text) => {
-		const doesAutoCompleteDataAlreadyExist = (this.state.results.length > 0)
-		const isNoText = (text === undefined || text.length === 0)
+	getLocations = async text => {
+		const doesAutoCompleteDataAlreadyExist = this.state.results.length > 0
+		const isNoText = text === undefined || text.length === 0
 
 		if (doesAutoCompleteDataAlreadyExist || isNoText) {
 			return
@@ -112,12 +112,9 @@ class LocationSearch extends Component {
 					size={'large'}
 					onChange={value => this.handleChange(value)}
 					onSelect={value => this.handleSelect(value)}
-					style={{width: '100%'}}
+					style={{ width: '100%' }}
 				>
-					<Search
-						size={'large'}
-						onSearch={this.getLocations}
-					/>
+					<Search size={'large'} onSearch={this.getLocations} />
 				</AutoComplete>
 			</Wrapper>
 		)

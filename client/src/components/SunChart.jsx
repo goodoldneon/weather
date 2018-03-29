@@ -6,7 +6,7 @@ import ReactHighcharts from 'react-highcharts'
 
 // Highcharts config object.
 const config = {
-    chart: {
+	chart: {
 		height: '200px',
 		backgroundColor: 'transparent',
 		margin: [0, 0, 0, 0],
@@ -18,37 +18,37 @@ const config = {
 	credits: {
 		enabled: false,
 	},
-    title: {
-        text: null,
-    },
-    xAxis: {
+	title: {
+		text: null,
+	},
+	xAxis: {
 		type: 'datetime',
-        labels: {
-            enabled: false,
+		labels: {
+			enabled: false,
 		},
 		gridLineWidth: 0,
 		lineWidth: 0,
 		tickWidth: 0,
-    },
-    yAxis: {
-        title: {
-            text: null,
-        },
-        labels: {
-            enabled: false,
-        },
+	},
+	yAxis: {
+		title: {
+			text: null,
+		},
+		labels: {
+			enabled: false,
+		},
 		gridLineWidth: 0,
-    },
-    tooltip: {
-        formatter: function () {
+	},
+	tooltip: {
+		formatter: function() {
 			return `
 				${Number(this.y).toFixed(2)} radians
 				<br />
 				${this.series.name === 'Now' ? 'Now' : format(this.x, 'h:mm a')}
 			`
-        },
-    },
-    series: [],
+		},
+	},
+	series: [],
 }
 
 class SunChart extends Component {
@@ -71,10 +71,12 @@ class SunChart extends Component {
 			})
 		}
 
-		const now = [{
-			x: timeNow,
-			y: sunCalc.getPosition(timeNow, this.props.lat, this.props.lng).altitude,
-		}]
+		const now = [
+			{
+				x: timeNow,
+				y: sunCalc.getPosition(timeNow, this.props.lat, this.props.lng).altitude,
+			},
+		]
 
 		config.series = [
 			{
@@ -108,9 +110,7 @@ class SunChart extends Component {
 			},
 		]
 
-		return (
-			<ReactHighcharts config={config} />
-		)
+		return <ReactHighcharts config={config} />
 	}
 }
 

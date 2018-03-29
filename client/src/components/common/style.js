@@ -14,8 +14,4 @@ const HorizontalSeparator = styled.div`
 	margin: 10px;
 `
 
-export {
-	Label,
-	Value,
-	HorizontalSeparator,
-}
+export { Label, Value, HorizontalSeparator }

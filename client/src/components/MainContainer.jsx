@@ -28,8 +28,8 @@ class MainContainer extends Component {
 			location: null,
 			current: null,
 			days: [],
-            hours: [],
-            activeDayIndex: 0,
+			hours: [],
+			activeDayIndex: 0,
 		}
 	}
 
@@ -40,11 +40,11 @@ class MainContainer extends Component {
 			lng: -83.7092861,
 		}
 
-		this.setState({location: locationDefault})
+		this.setState({ location: locationDefault })
 		this.getWeather(locationDefault)
 	}
 
-	getWeather = async (location) => {
+	getWeather = async location => {
 		const url = `${API_ROOT}/weather`
 		const res = await axios.post(url, location)
 
@@ -63,40 +63,34 @@ class MainContainer extends Component {
 
 	render() {
 		const location = this.state.location
-        const current = this.state.current
-        const hours = this.state.hours
-        const days = this.state.days
-        const activeDayIndex = this.state.activeDayIndex
+		const current = this.state.current
+		const hours = this.state.hours
+		const days = this.state.days
+		const activeDayIndex = this.state.activeDayIndex
 
-        // Make sure index doesn't go past array length.
-        const activeDay = (activeDayIndex <= (days.length + 1)) ? days[activeDayIndex] : null
+		// Make sure index doesn't go past array length.
+		const activeDay = activeDayIndex <= days.length + 1 ? days[activeDayIndex] : null
 
 		return (
 			<Wrapper>
-				<LocationSearch
-					onSelectSearch={location => this.getWeather(location)}
-				/>
+				<LocationSearch onSelectSearch={location => this.getWeather(location)} />
 
-				<WeatherCurrent
-					location={location}
-					current={current}
-					hours={hours}
-				/>
+				<WeatherCurrent location={location} current={current} hours={hours} />
 
 				<HorizontalSeparator />
 
-                {days.length >= 4 &&
-                    <ForecastDays
-                        days={days.slice(0, 4)}
-                        activeDayIndex={activeDayIndex}
-                        onChangeActiveDayIndex={val => this.setState({activeDayIndex: val})}
-                    />
-                }
+				{days.length >= 4 && (
+					<ForecastDays
+						days={days.slice(0, 4)}
+						activeDayIndex={activeDayIndex}
+						onChangeActiveDayIndex={val => this.setState({ activeDayIndex: val })}
+					/>
+				)}
 
-                <WeatherActive data={activeDay} />
+				<WeatherActive data={activeDay} />
 			</Wrapper>
 		)
-  	}
+	}
 }
 
 export default MainContainer

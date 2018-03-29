@@ -44,13 +44,13 @@ const Table = styled.table`
 `
 
 const Day = styled.div`
-	color: rgba(255,255,255,0.6);
+	color: rgba(255, 255, 255, 0.6);
 `
 
 const ExpandToggle = styled.div`
 	padding-top: 20px;
 	text-align: center;
-	
+
 	a {
 		color: #ffffff;
 	}
@@ -71,29 +71,25 @@ class Hourly extends Component {
 
 	toggleRowLimit() {
 		const areRowsLimited = this.state.areRowsLimited
-		this.setState({areRowsLimited: !areRowsLimited})
+		this.setState({ areRowsLimited: !areRowsLimited })
 	}
-	
+
 	render() {
 		const areRowsLimited = this.state.areRowsLimited
-		const maxRows = (areRowsLimited ? 8 : 24)
+		const maxRows = areRowsLimited ? 8 : 24
 		const data = this.props.data.slice(0, maxRows)
 		const timeFormat = 'h a'
 
 		if (data.length === 0) {
-			return (
-				<WrapperNoData>
-					No hourly data
-				</WrapperNoData>
-			)
+			return <WrapperNoData>No hourly data</WrapperNoData>
 		} else {
 			return (
 				<Wrapper>
 					<Table>
 						<thead>
 							<tr>
-								<th style={{textAlign: 'left'}}>Time</th>
-								<th style={{textAlign: 'left'}}>Summary</th>
+								<th style={{ textAlign: 'left' }}>Time</th>
+								<th style={{ textAlign: 'left' }}>Summary</th>
 								<th>Precip</th>
 								<th>Wind</th>
 								<th>Temp</th>
@@ -103,22 +99,20 @@ class Hourly extends Component {
 						<tbody>
 							{data.map((a, i) => {
 								const isToday = isBefore(a.time, addDays(startOfToday(), 1))
-								const day = (isToday ? 'Today' : format(a.time, 'dddd'))
+								const day = isToday ? 'Today' : format(a.time, 'dddd')
 								const time = format(a.time, timeFormat)
 
 								return (
 									<tr key={i}>
-										<td style={{textAlign: 'left'}}>
+										<td style={{ textAlign: 'left' }}>
 											<div>{time}</div>
 											<Day>{day}</Day>
 										</td>
 
-										<td style={{textAlign: 'left'}}>
+										<td style={{ textAlign: 'left' }}>
 											<i className={`wi ${getIconName(a.icon)}`} />
 
-											<span style={{paddingLeft: '5px'}}>
-												{a.summary}
-											</span>
+											<span style={{ paddingLeft: '5px' }}>{a.summary}</span>
 										</td>
 
 										<td>{Math.round(a.precip * 100)}%</td>

@@ -10,7 +10,7 @@ const Wrapper = styled.div`
 	padding: 10px;
 
 	:hover {
-		${props => !props.isActiveDay ? 'background: rgba(255, 255, 255, 0.1)' : ''};
+		${props => (!props.isActiveDay ? 'background: rgba(255, 255, 255, 0.1)' : '')};
 	}
 `
 
@@ -56,49 +56,42 @@ const TempLow = styled.div`
 
 class ForecastDay extends Component {
 	render() {
-        const day = this.props.data
-        const isToday = isBefore(day.time, addDays(startOfToday(), 1))
-		const dayName = (isToday ? 'Today' : format(day.time, 'ddd'))
+		const day = this.props.data
+		const isToday = isBefore(day.time, addDays(startOfToday(), 1))
+		const dayName = isToday ? 'Today' : format(day.time, 'ddd')
 		const date = format(day.time, 'MMM D')
 
 		return (
-			<Wrapper
-				onClick={this.props.onClick}
-				isActiveDay={this.props.isActiveDay}
-			>
-                <Row>
-                    <DayName>{dayName}</DayName>
-                    <Date>{date}</Date>
-                </Row>
+			<Wrapper onClick={this.props.onClick} isActiveDay={this.props.isActiveDay}>
+				<Row>
+					<DayName>{dayName}</DayName>
+					<Date>{date}</Date>
+				</Row>
 
-                <HorizontalSeparator />
+				<HorizontalSeparator />
 
-                <Row style={{marginBottom: '10px'}}>
-                    <Condition>
-                        <i className={`wi ${getIconName(day.icon)}`} />
-                    </Condition>
+				<Row style={{ marginBottom: '10px' }}>
+					<Condition>
+						<i className={`wi ${getIconName(day.icon)}`} />
+					</Condition>
 
-                    <Precip>
-                        <i className={'wi wi-raindrop'} />
+					<Precip>
+						<i className={'wi wi-raindrop'} />
 
-						<span style={{paddingLeft: '5px'}}>
+						<span style={{ paddingLeft: '5px' }}>
 							{Math.round(day.precip.probability * 100)}%
 						</span>
-                    </Precip>
-                </Row>
+					</Precip>
+				</Row>
 
-                <Row>
-                    <TempHigh>
-                        {Math.round(day.temperature.actual.high)}&deg;
-                    </TempHigh>
-                        
-                    <TempLow>
-                        {Math.round(day.temperature.actual.low)}&deg;
-                    </TempLow>
-                </Row>
-            </Wrapper>
-        )
-  	}
+				<Row>
+					<TempHigh>{Math.round(day.temperature.actual.high)}&deg;</TempHigh>
+
+					<TempLow>{Math.round(day.temperature.actual.low)}&deg;</TempLow>
+				</Row>
+			</Wrapper>
+		)
+	}
 }
 
 ForecastDay.propTypes = {

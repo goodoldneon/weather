@@ -1,4 +1,4 @@
-require('dotenv').config({path: __dirname + '/.env'})
+require('dotenv').config({ path: __dirname + '/.env' })
 
 const express = require('express')
 const bodyParser = require('body-parser')
@@ -11,7 +11,7 @@ const weather = require('./modules/weather')
 app.set('port', process.env.PORT || 60001)
 
 // Allow CORS (cross-origin resource sharing).
-app.use(function (req, res, next) {
+app.use(function(req, res, next) {
 	res.header('Access-Control-Allow-Origin', '*')
 	res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE')
 	res.header('Access-Control-Allow-Headers', 'Content-Type')
@@ -27,11 +27,11 @@ app.get('/api/location', async (req, res) => {
 	const text = req.query.text
 	const locations = await geocode.getLocations(text)
 
-    if (locations.error) {
-        console.log(locations.error.msg)
-        return res.status(500).send({
-            error: locations.error,
-        })
+	if (locations.error) {
+		console.log(locations.error.msg)
+		return res.status(500).send({
+			error: locations.error,
+		})
 	}
 
 	res.status(200).send(locations)
@@ -39,24 +39,24 @@ app.get('/api/location', async (req, res) => {
 
 app.post('/api/weather', async (req, res) => {
 	const location = req.body
-    const shouldGetCached = false
-    let weatherData = {}
+	const shouldGetCached = false
+	let weatherData = {}
 
-    if (shouldGetCached) {
-        weatherData = JSON.parse(fs.readFileSync(__dirname + '/data/weather.json'))
-    } else {
-        weatherData = await weather.getData(location.lat, location.lng)
-    }
-
-	if (fs.existsSync(__dirname + '/data')) {
-		fs.writeFileSync(__dirname + '/data/weather.json', JSON.stringify(weatherData) , 'utf-8')
+	if (shouldGetCached) {
+		weatherData = JSON.parse(fs.readFileSync(__dirname + '/data/weather.json'))
+	} else {
+		weatherData = await weather.getData(location.lat, location.lng)
 	}
 
-    res.status(200).send({
-        current: weatherData.current,
-        days: weatherData.days,
-        hours: weatherData.hours,
-    })
+	if (fs.existsSync(__dirname + '/data')) {
+		fs.writeFileSync(__dirname + '/data/weather.json', JSON.stringify(weatherData), 'utf-8')
+	}
+
+	res.status(200).send({
+		current: weatherData.current,
+		days: weatherData.days,
+		hours: weatherData.hours,
+	})
 })
 
 app.listen(app.get('port'), () => {

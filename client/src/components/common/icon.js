@@ -1,4 +1,4 @@
-const getIconName = (icon) => {
+const getIconName = icon => {
 	const iconTranslate = {
 		'clear-day': 'day-sunny',
 		'clear-night': 'night-clear',
@@ -15,10 +15,7 @@ const getIconName = (icon) => {
 		tornado: 'tornado',
 	}
 
-	return `wi-${(iconTranslate[icon] || 'na')}`
+	return `wi-${iconTranslate[icon] || 'na'}`
 }
 
-export {
-	getIconName as default,
-	getIconName,
-}
+export { getIconName as default, getIconName }

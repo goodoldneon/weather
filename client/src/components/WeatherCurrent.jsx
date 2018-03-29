@@ -48,7 +48,7 @@ const Summary = styled.div`
 
 const CollapseStyled = styled(Collapse)`
 	background: transparent;
-	
+
 	i {
 		color: #ffffff;
 	}
@@ -64,17 +64,13 @@ class WeatherCurrent extends Component {
 		const current = this.props.current
 		const hours = this.props.hours
 
-        if (current) {
-            return (
-                <Wrapper>
+		if (current) {
+			return (
+				<Wrapper>
 					<Location>
-						<div style={{flexGrow: 1}}>
-							Now
-						</div>
-						
-						<div style={{flexGrow: 6, textAlign: 'right'}}>
-							{location.name}
-						</div>
+						<div style={{ flexGrow: 1 }}>Now</div>
+
+						<div style={{ flexGrow: 6, textAlign: 'right' }}>{location.name}</div>
 					</Location>
 
 					<Condition>
@@ -82,12 +78,10 @@ class WeatherCurrent extends Component {
 							<i className={`wi ${getIconName(current.icon)}`} />
 						</ConditionIcon>
 
-						<Temperature>
-							{Math.round(current.temperature.actual)}&deg;F
-						</Temperature>
+						<Temperature>{Math.round(current.temperature.actual)}&deg;F</Temperature>
 
 						<Detail>
-							<Row style={{marginBottom: '5px'}}>
+							<Row style={{ marginBottom: '5px' }}>
 								<Col span={6}>
 									<Label>Feels Like</Label>
 									<Value>{Math.round(current.temperature.apparent)}&deg;</Value>
@@ -111,40 +105,30 @@ class WeatherCurrent extends Component {
 						</Detail>
 					</Condition>
 
-					<Summary>
-                        {current.summary}
-                    </Summary>
+					<Summary>{current.summary}</Summary>
 
 					<HorizontalSeparator />
 
 					<CollapseStyled bordered={false}>
-						<Panel
-							header={<PanelHeader>Sun Height</PanelHeader>}
-							style={{border: 0}}
-						>
-							<SunChart
-								lat={location.lat}
-								lng={location.lng}
-							/>
+						<Panel header={<PanelHeader>Sun Height</PanelHeader>} style={{ border: 0 }}>
+							<SunChart lat={location.lat} lng={location.lng} />
 						</Panel>
 					</CollapseStyled>
 
 					<CollapseStyled bordered={false}>
 						<Panel
 							header={<PanelHeader>Hourly Conditions</PanelHeader>}
-							style={{border: 0}}
+							style={{ border: 0 }}
 						>
 							<Hourly data={hours} />
 						</Panel>
 					</CollapseStyled>
-                </Wrapper>
-            )
-        } else {
-            return (
-                <div />
-            )
-        }
-  	}
+				</Wrapper>
+			)
+		} else {
+			return <div />
+		}
+	}
 }
 
 WeatherCurrent.propTypes = {

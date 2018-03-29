@@ -1,6 +1,6 @@
 const axios = require('axios')
 
-const parseHour = (raw) => {
+const parseHour = raw => {
 	return {
 		time: new Date(0).setUTCSeconds(raw.time),
 		summary: raw.summary,
@@ -11,7 +11,7 @@ const parseHour = (raw) => {
 	}
 }
 
-const parseDay = (raw) => {
+const parseDay = raw => {
 	return {
 		time: new Date(0).setUTCSeconds(raw.time),
 		summary: raw.summary,
@@ -50,7 +50,7 @@ const getData = async (lat, lng) => {
 	const res = await axios.get(url)
 
 	if (res.status !== 200) {
-		console.log(`Weather not found for zip "${zip}"`)
+		console.log(`Weather not found for location`)
 
 		return {}
 	}

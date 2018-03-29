@@ -1,48 +1,22 @@
 module.exports = {
-	"ecmaFeatures": {
-		"jsx": true,
-		"modules": true,
-	},
-	"env": {
-		"browser": true,
-		"es6": true,
-		"node": true,
-	},
-	"parser": "babel-eslint",
-	"rules": {
-		"eol-last": 2,
-		"max-len": [2, 100, 4],
-		"no-underscore-dangle": [0],
-		"no-var": 2,
-		"react/display-name": 0,
-		"react/jsx-boolean-value": 2,
-		"jsx-quotes": 2,
-		"react/jsx-no-undef": 2,
-		"react/jsx-sort-props": 0,
-		"react/jsx-uses-react": 2,
-		"react/jsx-uses-vars": 2,
-		"react/no-did-mount-set-state": 2,
-		"react/no-did-update-set-state": 2,
-		"react/no-multi-comp": 0,
-		"react/no-unknown-property": 2,
-		"react/prop-types": 2,
-		"react/react-in-jsx-scope": 2,
-		"react/self-closing-comp": 2,
-		"react/jsx-wrap-multilines": 2,
-		"quotes": [2, "single"],
-		"space-before-function-paren": [2, {
-			"anonymous": "always",
-			"named": "never",
-		}],
-		"prefer-const": "error",
-		"strict": [2, "global"],
-		"semi": [2, "never"],
-		"comma-dangle": ["error", "always-multiline"],
-		"no-unused-vars": "error",
-		"no-use-before-define": "error",
-		"no-undef": "error",
-	},
-	"plugins": [
-		"react",
-	],
+  extends: ["prettier"],
+  plugins: ["prettier", "react"],
+  ecmaFeatures: {
+    jsx: true,
+    modules: true
+  },
+  env: {
+    browser: true,
+    es6: true,
+    node: true
+  },
+  parser: "babel-eslint",
+  rules: {
+    "no-undef": "error",
+    "no-var": "error",
+    "no-unused-vars": "error",
+    "prefer-const": "error",
+    "react/jsx-uses-react": 2,
+    "react/jsx-uses-vars": 2
+  }
 };
