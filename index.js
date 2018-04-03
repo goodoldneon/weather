@@ -39,17 +39,12 @@ app.get('/api/location', async (req, res) => {
 
 app.post('/api/weather', async (req, res) => {
 	const location = req.body
-	const shouldGetCached = false
 	let weatherData = {}
 
-	if (shouldGetCached) {
-		weatherData = JSON.parse(fs.readFileSync(__dirname + '/data/weather.json'))
+	if (process.env.USE_STATIC_WEATHER) {
+		weatherData = JSON.parse(fs.readFileSync(__dirname + '/test/weather.json'))
 	} else {
 		weatherData = await weather.getData(location.lat, location.lng)
-	}
-
-	if (fs.existsSync(__dirname + '/data')) {
-		fs.writeFileSync(__dirname + '/data/weather.json', JSON.stringify(weatherData), 'utf-8')
 	}
 
 	res.status(200).send({

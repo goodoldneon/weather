@@ -1,0 +1,652 @@
+{
+  "current": {
+    "summary": "Drizzle",
+    "icon": "rain",
+    "temperature": {
+      "actual": 37.7,
+      "apparent": 31.08
+    },
+    "humidity": 0.96,
+    "cloudCover": 0.99,
+    "wind": {
+      "speed": 9.39,
+      "gust": 9.73,
+      "bearing": 92
+    }
+  },
+  "days": [
+    {
+      "time": 1522728000000,
+      "summary": "Rain starting in the evening.",
+      "icon": "rain",
+      "sunrise": 1522754075000,
+      "sunset": 1522800219000,
+      "moonPhase": 0.61,
+      "temperature": {
+        "actual": {
+          "low": 31.44,
+          "high": 39.79
+        },
+        "apparent": {
+          "low": 19.01,
+          "high": 33.31
+        }
+      },
+      "precip": {
+        "type": "rain",
+        "probability": 0.86
+      },
+      "humidity": 0.78,
+      "cloudCover": 0.88,
+      "wind": {
+        "speed": 8.26,
+        "gust": 13.11,
+        "bearing": 76
+      }
+    },
+    {
+      "time": 1522814400000,
+      "summary": "Mostly cloudy throughout the day and breezy until evening.",
+      "icon": "wind",
+      "sunrise": 1522840372000,
+      "sunset": 1522886686000,
+      "moonPhase": 0.64,
+      "temperature": {
+        "actual": {
+          "low": 24.19,
+          "high": 34.37
+        },
+        "apparent": {
+          "low": 13.83,
+          "high": 22.01
+        }
+      },
+      "precip": {
+        "type": "snow",
+        "probability": 0.76,
+        "accumulation": 0.414
+      },
+      "humidity": 0.79,
+      "cloudCover": 0.93,
+      "wind": {
+        "speed": 16.72,
+        "gust": 36.23,
+        "bearing": 293
+      }
+    },
+    {
+      "time": 1522900800000,
+      "summary": "Snow (< 1 in.) overnight.",
+      "icon": "snow",
+      "sunrise": 1522926669000,
+      "sunset": 1522973154000,
+      "moonPhase": 0.67,
+      "temperature": {
+        "actual": {
+          "low": 32.54,
+          "high": 40.25
+        },
+        "apparent": {
+          "low": 22.65,
+          "high": 33.32
+        }
+      },
+      "precip": {
+        "type": "snow",
+        "probability": 0.33,
+        "accumulation": 0.358
+      },
+      "humidity": 0.68,
+      "cloudCover": 0.64,
+      "wind": {
+        "speed": 7.73,
+        "gust": 20.54,
+        "bearing": 251
+      }
+    },
+    {
+      "time": 1522987200000,
+      "summary": "Mostly cloudy throughout the day and breezy until evening.",
+      "icon": "wind",
+      "sunrise": 1523012967000,
+      "sunset": 1523059621000,
+      "moonPhase": 0.7,
+      "temperature": {
+        "actual": {
+          "low": 21.54,
+          "high": 35.54
+        },
+        "apparent": {
+          "low": 9.26,
+          "high": 25.78
+        }
+      },
+      "precip": {
+        "type": "snow",
+        "probability": 0.52,
+        "accumulation": 1.333
+      },
+      "humidity": 0.75,
+      "cloudCover": 0.83,
+      "wind": {
+        "speed": 10.62,
+        "gust": 27.5,
+        "bearing": 277
+      }
+    },
+    {
+      "time": 1523073600000,
+      "summary": "Mostly cloudy throughout the day.",
+      "icon": "partly-cloudy-day",
+      "sunrise": 1523099266000,
+      "sunset": 1523146088000,
+      "moonPhase": 0.73,
+      "temperature": {
+        "actual": {
+          "low": 21.22,
+          "high": 35.12
+        },
+        "apparent": {
+          "low": 11.8,
+          "high": 26.98
+        }
+      },
+      "precip": {
+        "type": "snow",
+        "probability": 0.01,
+        "accumulation": 0.013
+      },
+      "humidity": 0.61,
+      "cloudCover": 0.67,
+      "wind": {
+        "speed": 10.86,
+        "gust": 19.91,
+        "bearing": 308
+      }
+    },
+    {
+      "time": 1523160000000,
+      "summary": "Mostly cloudy throughout the day.",
+      "icon": "partly-cloudy-day",
+      "sunrise": 1523185565000,
+      "sunset": 1523232555000,
+      "moonPhase": 0.76,
+      "temperature": {
+        "actual": {
+          "low": 26.27,
+          "high": 39.84
+        },
+        "apparent": {
+          "low": 18.49,
+          "high": 36.41
+        }
+      },
+      "precip": {
+        "type": "snow",
+        "probability": 0.05,
+        "accumulation": 0.015
+      },
+      "humidity": 0.54,
+      "cloudCover": 0.64,
+      "wind": {
+        "speed": 5.25,
+        "gust": 19.48,
+        "bearing": 331
+      }
+    },
+    {
+      "time": 1523246400000,
+      "summary": "Overcast throughout the day.",
+      "icon": "cloudy",
+      "sunrise": 1523271865000,
+      "sunset": 1523319022000,
+      "moonPhase": 0.79,
+      "temperature": {
+        "actual": {
+          "low": 26.53,
+          "high": 38.67
+        },
+        "apparent": {
+          "low": 19.23,
+          "high": 32.4
+        }
+      },
+      "precip": {
+        "type": "snow",
+        "probability": 0.27,
+        "accumulation": 0.798
+      },
+      "humidity": 0.7,
+      "cloudCover": 0.96,
+      "wind": {
+        "speed": 8.54,
+        "gust": 21.72,
+        "bearing": 91
+      }
+    },
+    {
+      "time": 1523332800000,
+      "summary": "Mostly cloudy throughout the day.",
+      "icon": "partly-cloudy-day",
+      "sunrise": 1523358165000,
+      "sunset": 1523405490000,
+      "moonPhase": 0.82,
+      "temperature": {
+        "actual": {
+          "low": 29.94,
+          "high": 41.79
+        },
+        "apparent": {
+          "low": 23.51,
+          "high": 36.29
+        }
+      },
+      "precip": {
+        "type": "snow",
+        "probability": 0.24,
+        "accumulation": 0.238
+      },
+      "humidity": 0.69,
+      "cloudCover": 0.97,
+      "wind": {
+        "speed": 4.51,
+        "gust": 22.9,
+        "bearing": 324
+      }
+    }
+  ],
+  "hours": [
+    {
+      "time": 1522792800000,
+      "summary": "Overcast",
+      "icon": "cloudy",
+      "temperature": 37.72,
+      "precip": 0,
+      "wind": 9.42
+    },
+    {
+      "time": 1522796400000,
+      "summary": "Overcast",
+      "icon": "cloudy",
+      "temperature": 37.39,
+      "precip": 0.75,
+      "wind": 8.97
+    },
+    {
+      "time": 1522800000000,
+      "summary": "Rain",
+      "icon": "rain",
+      "temperature": 36.92,
+      "precip": 0.75,
+      "wind": 8.17
+    },
+    {
+      "time": 1522803600000,
+      "summary": "Rain",
+      "icon": "rain",
+      "temperature": 36.49,
+      "precip": 0.72,
+      "wind": 8.54
+    },
+    {
+      "time": 1522807200000,
+      "summary": "Rain",
+      "icon": "rain",
+      "temperature": 36.36,
+      "precip": 0.67,
+      "wind": 8.42
+    },
+    {
+      "time": 1522810800000,
+      "summary": "Rain",
+      "icon": "rain",
+      "temperature": 36.34,
+      "precip": 0.62,
+      "wind": 7.36
+    },
+    {
+      "time": 1522814400000,
+      "summary": "Light Rain",
+      "icon": "rain",
+      "temperature": 36.38,
+      "precip": 0.52,
+      "wind": 6.13
+    },
+    {
+      "time": 1522818000000,
+      "summary": "Overcast",
+      "icon": "cloudy",
+      "temperature": 36.34,
+      "precip": 0.4,
+      "wind": 5.97
+    },
+    {
+      "time": 1522821600000,
+      "summary": "Overcast",
+      "icon": "cloudy",
+      "temperature": 36.18,
+      "precip": 0.25,
+      "wind": 7.4
+    },
+    {
+      "time": 1522825200000,
+      "summary": "Overcast",
+      "icon": "cloudy",
+      "temperature": 35.77,
+      "precip": 0.21,
+      "wind": 9.57
+    },
+    {
+      "time": 1522828800000,
+      "summary": "Overcast",
+      "icon": "cloudy",
+      "temperature": 35.38,
+      "precip": 0.28,
+      "wind": 12.55
+    },
+    {
+      "time": 1522832400000,
+      "summary": "Breezy and Overcast",
+      "icon": "wind",
+      "temperature": 34.5,
+      "precip": 0.27,
+      "wind": 16.25
+    },
+    {
+      "time": 1522836000000,
+      "summary": "Breezy and Mostly Cloudy",
+      "icon": "wind",
+      "temperature": 33.21,
+      "precip": 0.25,
+      "wind": 16.88
+    },
+    {
+      "time": 1522839600000,
+      "summary": "Breezy and Overcast",
+      "icon": "wind",
+      "temperature": 31.63,
+      "precip": 0.21,
+      "wind": 17.7
+    },
+    {
+      "time": 1522843200000,
+      "summary": "Breezy and Foggy",
+      "icon": "wind",
+      "temperature": 31.44,
+      "precip": 0.21,
+      "wind": 20.86
+    },
+    {
+      "time": 1522846800000,
+      "summary": "Breezy and Overcast",
+      "icon": "wind",
+      "temperature": 31.5,
+      "precip": 0.19,
+      "wind": 21.22
+    },
+    {
+      "time": 1522850400000,
+      "summary": "Breezy and Overcast",
+      "icon": "wind",
+      "temperature": 31.82,
+      "precip": 0.18,
+      "wind": 22.89
+    },
+    {
+      "time": 1522854000000,
+      "summary": "Breezy and Overcast",
+      "icon": "wind",
+      "temperature": 32.1,
+      "precip": 0.16,
+      "wind": 23.76
+    },
+    {
+      "time": 1522857600000,
+      "summary": "Breezy and Overcast",
+      "icon": "wind",
+      "temperature": 32.92,
+      "precip": 0.13,
+      "wind": 24.21
+    },
+    {
+      "time": 1522861200000,
+      "summary": "Breezy and Overcast",
+      "icon": "wind",
+      "temperature": 33.89,
+      "precip": 0.09,
+      "wind": 24.46
+    },
+    {
+      "time": 1522864800000,
+      "summary": "Breezy and Overcast",
+      "icon": "wind",
+      "temperature": 34.37,
+      "precip": 0.06,
+      "wind": 24.38
+    },
+    {
+      "time": 1522868400000,
+      "summary": "Breezy and Overcast",
+      "icon": "wind",
+      "temperature": 34.06,
+      "precip": 0.06,
+      "wind": 23.93
+    },
+    {
+      "time": 1522872000000,
+      "summary": "Breezy and Overcast",
+      "icon": "wind",
+      "temperature": 33.66,
+      "precip": 0.08,
+      "wind": 23.2
+    },
+    {
+      "time": 1522875600000,
+      "summary": "Breezy and Overcast",
+      "icon": "wind",
+      "temperature": 33.36,
+      "precip": 0.08,
+      "wind": 22.28
+    },
+    {
+      "time": 1522879200000,
+      "summary": "Breezy and Overcast",
+      "icon": "wind",
+      "temperature": 32.37,
+      "precip": 0.07,
+      "wind": 21.18
+    },
+    {
+      "time": 1522882800000,
+      "summary": "Breezy and Overcast",
+      "icon": "wind",
+      "temperature": 30.38,
+      "precip": 0.05,
+      "wind": 19.86
+    },
+    {
+      "time": 1522886400000,
+      "summary": "Breezy and Overcast",
+      "icon": "wind",
+      "temperature": 28.39,
+      "precip": 0.04,
+      "wind": 18.27
+    },
+    {
+      "time": 1522890000000,
+      "summary": "Breezy and Mostly Cloudy",
+      "icon": "wind",
+      "temperature": 26.81,
+      "precip": 0.03,
+      "wind": 16.17
+    },
+    {
+      "time": 1522893600000,
+      "summary": "Partly Cloudy",
+      "icon": "partly-cloudy-night",
+      "temperature": 25.54,
+      "precip": 0.03,
+      "wind": 13.79
+    },
+    {
+      "time": 1522897200000,
+      "summary": "Partly Cloudy",
+      "icon": "partly-cloudy-night",
+      "temperature": 24.77,
+      "precip": 0.02,
+      "wind": 11.72
+    },
+    {
+      "time": 1522900800000,
+      "summary": "Partly Cloudy",
+      "icon": "partly-cloudy-night",
+      "temperature": 24.34,
+      "precip": 0.02,
+      "wind": 9.84
+    },
+    {
+      "time": 1522904400000,
+      "summary": "Partly Cloudy",
+      "icon": "partly-cloudy-night",
+      "temperature": 24.25,
+      "precip": 0.02,
+      "wind": 8.61
+    },
+    {
+      "time": 1522908000000,
+      "summary": "Partly Cloudy",
+      "icon": "partly-cloudy-night",
+      "temperature": 24.19,
+      "precip": 0.02,
+      "wind": 7.83
+    },
+    {
+      "time": 1522911600000,
+      "summary": "Partly Cloudy",
+      "icon": "partly-cloudy-night",
+      "temperature": 24.35,
+      "precip": 0.03,
+      "wind": 7.28
+    },
+    {
+      "time": 1522915200000,
+      "summary": "Mostly Cloudy",
+      "icon": "partly-cloudy-night",
+      "temperature": 24.63,
+      "precip": 0.04,
+      "wind": 7.73
+    },
+    {
+      "time": 1522918800000,
+      "summary": "Mostly Cloudy",
+      "icon": "partly-cloudy-night",
+      "temperature": 25.71,
+      "precip": 0.05,
+      "wind": 8.46
+    },
+    {
+      "time": 1522922400000,
+      "summary": "Mostly Cloudy",
+      "icon": "partly-cloudy-night",
+      "temperature": 26.48,
+      "precip": 0.05,
+      "wind": 7.75
+    },
+    {
+      "time": 1522926000000,
+      "summary": "Partly Cloudy",
+      "icon": "partly-cloudy-night",
+      "temperature": 26.79,
+      "precip": 0.03,
+      "wind": 6.71
+    },
+    {
+      "time": 1522929600000,
+      "summary": "Partly Cloudy",
+      "icon": "partly-cloudy-day",
+      "temperature": 26.87,
+      "precip": 0.02,
+      "wind": 7.64
+    },
+    {
+      "time": 1522933200000,
+      "summary": "Partly Cloudy",
+      "icon": "partly-cloudy-day",
+      "temperature": 27.81,
+      "precip": 0.02,
+      "wind": 8.18
+    },
+    {
+      "time": 1522936800000,
+      "summary": "Partly Cloudy",
+      "icon": "partly-cloudy-day",
+      "temperature": 29.13,
+      "precip": 0.03,
+      "wind": 9.05
+    },
+    {
+      "time": 1522940400000,
+      "summary": "Partly Cloudy",
+      "icon": "partly-cloudy-day",
+      "temperature": 31.06,
+      "precip": 0.04,
+      "wind": 9.74
+    },
+    {
+      "time": 1522944000000,
+      "summary": "Partly Cloudy",
+      "icon": "partly-cloudy-day",
+      "temperature": 32.68,
+      "precip": 0.07,
+      "wind": 9.98
+    },
+    {
+      "time": 1522947600000,
+      "summary": "Partly Cloudy",
+      "icon": "partly-cloudy-day",
+      "temperature": 34.54,
+      "precip": 0.13,
+      "wind": 10.07
+    },
+    {
+      "time": 1522951200000,
+      "summary": "Mostly Cloudy",
+      "icon": "partly-cloudy-day",
+      "temperature": 36.16,
+      "precip": 0.17,
+      "wind": 10.24
+    },
+    {
+      "time": 1522954800000,
+      "summary": "Mostly Cloudy",
+      "icon": "partly-cloudy-day",
+      "temperature": 37.74,
+      "precip": 0.19,
+      "wind": 10.81
+    },
+    {
+      "time": 1522958400000,
+      "summary": "Mostly Cloudy",
+      "icon": "partly-cloudy-day",
+      "temperature": 39.17,
+      "precip": 0.21,
+      "wind": 11.43
+    },
+    {
+      "time": 1522962000000,
+      "summary": "Mostly Cloudy",
+      "icon": "partly-cloudy-day",
+      "temperature": 40.25,
+      "precip": 0.23,
+      "wind": 11.55
+    },
+    {
+      "time": 1522965600000,
+      "summary": "Mostly Cloudy",
+      "icon": "partly-cloudy-day",
+      "temperature": 39.61,
+      "precip": 0.24,
+      "wind": 10.54
+    }
+  ]
+}

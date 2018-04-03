@@ -8,12 +8,8 @@ https://aaronharper.net/weather
 1. `cd client`
 1. `yarn install`
 
-# Serve dev environment
+# Development
 
-2 servers need to be running.
-	1. To start the Node server, run `yarn start` in the root.
-	1. To start the React server, run `yarn start` in `/client` directory.
-
-# Serve prod environment
-
-Run `node index.js` in the root.
+* `yarn dev`
+* `USE_STATIC_WEATHER=true yarn dev`
+  * Use static weather data, found in `/test/weather.json`.
