@@ -4,7 +4,10 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "prettier-watch": "onchange '**/*.{js,jsx}' -- prettier --write {{changed}}"
+    "dev": "concurrently --kill-others \"npm run dev:client\" \"npm run dev:serve\" \"npm run dev:prettier\"",
+    "dev:client": "cd ./client && yarn start",
+    "dev:serve": "nodemon index.js",
+    "dev:prettier": "onchange '**/*.{js,jsx}' -- prettier --write {{changed}}"
   },
   "dependencies": {
     "axios": "^0.17.1",
@@ -14,6 +17,7 @@
   },
   "devDependencies": {
     "babel-eslint": "^8.2.2",
+    "concurrently": "^3.5.1",
     "eslint": "^4.19.1",
     "eslint-config-prettier": "^2.9.0",
     "eslint-plugin-prettier": "^2.6.0",

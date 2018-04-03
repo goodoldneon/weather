@@ -4,8 +4,6 @@ import styled from 'styled-components'
 import axios from 'axios'
 import { Input, AutoComplete, Modal } from 'antd'
 
-import { API_ROOT } from './../api-config'
-
 const Search = Input.Search
 
 const Wrapper = styled.div`
@@ -60,7 +58,7 @@ class LocationSearch extends Component {
 			return
 		}
 
-		const url = `${API_ROOT}/location?text=${text}`
+		const url = `${process.env.REACT_APP_API_URL}/location?text=${text}`
 		let res = null
 
 		try {
