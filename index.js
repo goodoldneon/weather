@@ -1,4 +1,16 @@
-require('dotenv').config({ path: __dirname + '/.env' })
+if (process.env.NODE_ENV !== 'production') {
+	require('dotenv').load()
+}
+
+if (!process.env.DARKSKY_API_KEY) {
+	console.error('No environment variable DARKSKY_API_KEY. Darksky API key is required.')
+	process.exit()
+}
+
+if (!process.env.GOOGLE_API_KEY) {
+	console.error('No environment variable GOOGLE_API_KEY. Google Geocoding API key is required.')
+	process.exit()
+}
 
 const express = require('express')
 const bodyParser = require('body-parser')

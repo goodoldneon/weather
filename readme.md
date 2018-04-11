@@ -2,11 +2,20 @@
 
 https://aaronharper.net/weather
 
-# Install dependencies
+# Getting Started
+
+## Install Dependencies
 
 1. `yarn install`
 1. `cd client`
 1. `yarn install`
+
+## API Keys
+
+This project requires 2 API keys:
+
+* Darksky (for weather) -- https://darksky.net/dev
+* Google Geocoding (for location) -- https://developers.google.com/maps/documentation/geocoding/get-api-key
 
 # Development
 
