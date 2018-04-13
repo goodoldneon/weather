@@ -5,6 +5,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "concurrently --kill-others \"npm run dev:client\" \"npm run dev:serve\" \"npm run dev:prettier\"",
+    "dev:start": "concurrently --kill-others \"npm run dev:client\" \"npm run dev:serve\"",
     "dev:client": "cd ./client && yarn start",
     "dev:serve": "nodemon index.js",
     "dev:prettier": "onchange '**/*.{js,jsx}' -- prettier --write {{changed}}"
