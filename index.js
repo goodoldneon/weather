@@ -12,7 +12,9 @@ if (!process.env.GOOGLE_API_KEY) {
 	process.exit()
 }
 
+const path = require('path')
 const express = require('express')
+const cors = require('cors')
 const bodyParser = require('body-parser')
 const fs = require('fs')
 const app = express()
@@ -22,25 +24,16 @@ const weather = require('./modules/weather')
 
 app.set('port', process.env.PORT || 60001)
 
-// Allow CORS (cross-origin resource sharing).
-app.use(function(req, res, next) {
-	res.header('Access-Control-Allow-Origin', '*')
-	res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE')
-	res.header('Access-Control-Allow-Headers', 'Content-Type')
-	next()
-})
-
-// parse application/json
+app.use(cors())
 app.use(bodyParser.json())
 
-app.use('/', express.static(__dirname + '/client/build'))
+app.use('/', express.static(path.join(__dirname, 'client', 'build')))
 
 app.get('/api/location', async (req, res) => {
 	const text = req.query.text
 	const locations = await geocode.getLocations(text)
 
 	if (locations.error) {
-		console.log(locations.error.msg)
 		return res.status(500).send({
 			error: locations.error,
 		})
@@ -54,7 +47,7 @@ app.post('/api/weather', async (req, res) => {
 	let weatherData = {}
 
 	if (process.env.USE_STATIC_WEATHER) {
-		weatherData = JSON.parse(fs.readFileSync(__dirname + '/test/weather.json'))
+		weatherData = JSON.parse(fs.readFileSync(path.join(__dirname, 'test', 'weather.json')))
 	} else {
 		weatherData = await weather.getData(location.lat, location.lng)
 	}
