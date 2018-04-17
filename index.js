@@ -16,7 +16,6 @@ const path = require('path')
 const express = require('express')
 const cors = require('cors')
 const bodyParser = require('body-parser')
-const fs = require('fs')
 const app = express()
 
 const geocode = require('./modules/geocode')
@@ -47,7 +46,7 @@ app.post('/api/weather', async (req, res) => {
 	let weatherData = {}
 
 	if (process.env.USE_STATIC_WEATHER) {
-		weatherData = JSON.parse(fs.readFileSync(path.join(__dirname, 'test', 'weather.json')))
+		weatherData = await weather.getDataStatic()
 	} else {
 		weatherData = await weather.getData(location.lat, location.lng)
 	}

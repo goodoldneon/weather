@@ -1,3 +1,5 @@
+const fs = require('fs')
+const path = require('path')
 const axios = require('axios')
 
 const parseHour = raw => {
@@ -88,6 +90,13 @@ const getData = async (lat, lng) => {
 	}
 }
 
+const getDataStatic = async () => {
+  const staticDataPath = path.join(__dirname, '..', 'test', 'weather.json')
+
+  return JSON.parse(fs.readFileSync(staticDataPath))
+}
+
 module.exports = {
-	getData,
+  getData,
+  getDataStatic,
 }
