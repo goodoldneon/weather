@@ -64,18 +64,19 @@ class LocationSearch extends Component {
     try {
       res = await axios.get(url)
     } catch (error) {
-      res = {
-        error: {
-          msg: error.message,
-        },
-      }
-    }
+      const title = 'Server Error'
+      const axiosErrorMessage = error.message
+      const serverErrorMessage = error.response.data.error.message
 
-    if (res.error) {
-      const title = 'Server error'
-      const content = res.error.msg
-      modalError(title, content)
-      return
+      const content = (
+        <div>
+          <div>{axiosErrorMessage}</div>
+          <br />
+          <div>{serverErrorMessage}</div>
+        </div>
+      )
+
+      return modalError(title, content)
     }
 
     const results = res.data.map(a => {

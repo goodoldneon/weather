@@ -7,25 +7,22 @@ const getLocations = async text => {
 
   const key = process.env.GOOGLE_API_KEY
   const url = `https://maps.googleapis.com/maps/api/geocode/json?key=${key}&address=${text}`
+  let res = null
 
-  const res = await axios.get(url, {
-    crossdomain: true,
-    headers: {
-      'Access-Control-Allow-Origin': '*',
-      'Content-Type': 'application/json',
-    },
-  })
-
-  if (res.status !== 200) {
+  try {
+    res = await axios.get(url)
+  } catch (error) {
     return {
       error: {
-        msg: `Google API error`,
+        message: `Google Geocode API error: ${error.message}`,
       },
     }
-  } else if (res.data.error_message) {
+  }
+
+  if (res.data.status !== 'OK') {
     return {
       error: {
-        msg: res.data.error_message,
+        message: `Google Geocode API error: ${res.data.error_message}`,
       },
     }
   }
