@@ -30,31 +30,37 @@ app.use('/', express.static(path.join(__dirname, 'client', 'build')))
 
 app.get('/api/location', async (req, res) => {
   const text = req.query.text
-  const locations = await geocode.getLocations(text)
+  const data = await geocode.getLocations(text)
 
-  if (locations.error) {
+  if (data.error) {
     return res.status(500).send({
-      error: locations.error,
+      error: data.error,
     })
   }
 
-  res.status(200).send(locations)
+  res.status(200).send(data)
 })
 
 app.post('/api/weather', async (req, res) => {
   const location = req.body
-  let weatherData = {}
+  let data = null
 
   if (process.env.USE_STATIC_WEATHER) {
-    weatherData = await weather.getDataStatic()
+    data = await weather.getDataStatic()
   } else {
-    weatherData = await weather.getData(location.lat, location.lng)
+    data = await weather.getData(location.lat, location.lng)
+  }
+
+  if (data.error) {
+    return res.status(500).send({
+      error: data.error,
+    })
   }
 
   res.status(200).send({
-    current: weatherData.current,
-    days: weatherData.days,
-    hours: weatherData.hours,
+    current: data.current,
+    days: data.days,
+    hours: data.hours,
   })
 })
 

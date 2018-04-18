@@ -49,12 +49,16 @@ const parseDay = raw => {
 const getData = async (lat, lng) => {
   const key = process.env.DARKSKY_API_KEY
   const url = `https://api.darksky.net/forecast/${key}/${lat},${lng}?exclude=[minutely]&units=us`
-  const res = await axios.get(url)
+  let res = null
 
-  if (res.status !== 200) {
-    console.log(`Weather not found for location`)
-
-    return {}
+  try {
+    res = await axios.get(url)
+  } catch (error) {
+    return {
+      error: {
+        message: `Dark Sky API error: ${error.message}`,
+      },
+    }
   }
 
   const current = res.data.currently

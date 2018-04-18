@@ -14,7 +14,15 @@ const Wrapper = styled.div`
 
 const WAIT_INTERVAL = 1000
 
-const modalError = (title, content) => {
+const modalError = (title, errorMessage, serverErrorMessage) => {
+  const content = (
+    <div>
+      <div>{errorMessage}</div>
+      <br />
+      <div>{serverErrorMessage}</div>
+    </div>
+  )
+
   Modal.error({
     title,
     content,
@@ -65,18 +73,10 @@ class LocationSearch extends Component {
       res = await axios.get(url)
     } catch (error) {
       const title = 'Server Error'
-      const axiosErrorMessage = error.message
+      const errorMessage = error.message
       const serverErrorMessage = error.response.data.error.message
 
-      const content = (
-        <div>
-          <div>{axiosErrorMessage}</div>
-          <br />
-          <div>{serverErrorMessage}</div>
-        </div>
-      )
-
-      return modalError(title, content)
+      return modalError(title, errorMessage, serverErrorMessage)
     }
 
     const results = res.data.map(a => {

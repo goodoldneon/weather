@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
 import axios from 'axios'
+import { Modal } from 'antd'
 import '../css/weather-icons.min.css'
 import '../css/weather-icons-wind.min.css'
 
@@ -18,6 +19,21 @@ const Wrapper = styled.div`
 const HorizontalSeparator = styled.div`
   border-bottom: 1px solid #ffffff;
 `
+
+const modalError = (title, errorMessage, serverErrorMessage) => {
+  const content = (
+    <div>
+      <div>{errorMessage}</div>
+      <br />
+      <div>{serverErrorMessage}</div>
+    </div>
+  )
+
+  Modal.error({
+    title,
+    content,
+  })
+}
 
 class MainContainer extends Component {
   constructor() {
@@ -45,11 +61,16 @@ class MainContainer extends Component {
 
   getWeather = async location => {
     const url = `${process.env.REACT_APP_API_URL}/weather`
-    const res = await axios.post(url, location)
+    let res = null
 
-    if (res.error) {
-      console.log(res.error.msg)
-      return
+    try {
+      res = await axios.post(url, location)
+    } catch (error) {
+      const title = 'Server Error'
+      const errorMessage = error.message
+      const serverErrorMessage = error.response.data.error.message
+
+      return modalError(title, errorMessage, serverErrorMessage)
     }
 
     this.setState({
