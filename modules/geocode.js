@@ -6,7 +6,8 @@ const getLocations = async text => {
 */
 
   const key = process.env.GOOGLE_API_KEY
-  const url = `https://maps.googleapis.com/maps/api/geocode/json?key=${key}&address=${text}`
+  const address = encodeURIComponent(text)
+  const url = `https://maps.googleapis.com/maps/api/geocode/json?key=${key}&address=${address}`
   let res = null
 
   try {

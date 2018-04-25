@@ -2,6 +2,15 @@ if (process.env.NODE_ENV !== 'production') {
   require('dotenv').load()
 }
 
+const path = require('path')
+const express = require('express')
+const cors = require('cors')
+const bodyParser = require('body-parser')
+const app = express()
+
+const geocode = require('./modules/geocode')
+const weather = require('./modules/weather')
+
 if (!process.env.DARKSKY_API_KEY) {
   console.error('No environment variable DARKSKY_API_KEY. Darksky API key is required.')
   process.exit()
@@ -11,15 +20,6 @@ if (!process.env.GOOGLE_API_KEY) {
   console.error('No environment variable GOOGLE_API_KEY. Google Geocoding API key is required.')
   process.exit()
 }
-
-const path = require('path')
-const express = require('express')
-const cors = require('cors')
-const bodyParser = require('body-parser')
-const app = express()
-
-const geocode = require('./modules/geocode')
-const weather = require('./modules/weather')
 
 app.set('port', process.env.PORT || 60001)
 
@@ -38,7 +38,7 @@ app.get('/api/location', async (req, res) => {
     })
   }
 
-  res.status(200).send(data)
+  res.json(data)
 })
 
 app.post('/api/weather', async (req, res) => {
@@ -57,7 +57,7 @@ app.post('/api/weather', async (req, res) => {
     })
   }
 
-  res.status(200).send({
+  res.json({
     current: data.current,
     days: data.days,
     hours: data.hours,
