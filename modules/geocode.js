@@ -1,11 +1,13 @@
 const axios = require('axios')
 
+const config = require('../config')
+
 const getLocations = async text => {
   /*
 	Returns an array of locations using Google's Geocode API.
 */
 
-  const key = process.env.GOOGLE_API_KEY
+  const key = config.googleGeocodeApiKey
   const address = encodeURIComponent(text)
   const url = `https://maps.googleapis.com/maps/api/geocode/json?key=${key}&address=${address}`
   let res = null

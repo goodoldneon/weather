@@ -2,6 +2,8 @@ const fs = require('fs')
 const path = require('path')
 const axios = require('axios')
 
+const config = require('../config')
+
 const parseHour = raw => {
   return {
     time: new Date(0).setUTCSeconds(raw.time),
@@ -47,7 +49,7 @@ const parseDay = raw => {
 }
 
 const getData = async (lat, lng) => {
-  const key = process.env.DARKSKY_API_KEY
+  const key = config.darkskyApiKey
   const url = `https://api.darksky.net/forecast/${key}/${lat},${lng}?exclude=[minutely]&units=us`
   let res = null
 
