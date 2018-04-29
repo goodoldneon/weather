@@ -39,9 +39,8 @@ class LocationSearch extends Component {
     }
   }
 
-  handleChange(value) {
+  handleChange = value => {
     clearTimeout(this.timer)
-    value = value === '0' ? '' : value
 
     this.setState({
       value,
@@ -52,8 +51,8 @@ class LocationSearch extends Component {
     this.timer = setTimeout(() => this.getLocations(value), WAIT_INTERVAL)
   }
 
-  handleSelect(value) {
-    const location = this.state.results[value]
+  handleSelect = (value, option) => {
+    const location = this.state.results.filter(result => result.name === value)[0]
     this.props.onSelectSearch(location)
     this.setState({ results: [] })
   }
@@ -83,16 +82,15 @@ class LocationSearch extends Component {
 
     this.setState({
       results: results,
-      // isSearching: false,
     })
   }
 
   render() {
     // Convert search results into an object used to display results to the user.
-    const autoCompleteData = this.state.results.map((a, i) => {
+    const dataSource = this.state.results.map((a, i) => {
       return {
         text: a.name,
-        value: i,
+        value: a.name,
       }
     })
 
@@ -101,10 +99,11 @@ class LocationSearch extends Component {
         <AutoComplete
           value={this.state.value}
           placeholder={'Search for location'}
-          dataSource={autoCompleteData}
+          dataSource={dataSource}
           size={'large'}
-          onChange={value => this.handleChange(value)}
-          onSelect={value => this.handleSelect(value)}
+          autoFocus={true}
+          onChange={this.handleChange}
+          onSelect={this.handleSelect}
           style={{ width: '100%' }}
         >
           <Search size={'large'} onSearch={this.getLocations} />
