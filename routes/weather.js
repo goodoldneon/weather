@@ -102,7 +102,25 @@ const getDataStatic = async () => {
   return JSON.parse(fs.readFileSync(staticDataPath))
 }
 
-module.exports = {
-  getData,
-  getDataStatic,
+module.exports = async (req, res) => {
+  const location = req.body
+  let data = null
+
+  if (config.useStaticWeather) {
+    data = await getDataStatic()
+  } else {
+    data = await getData(location.lat, location.lng)
+  }
+
+  if (data.error) {
+    return res.status(500).send({
+      error: data.error,
+    })
+  }
+
+  res.json({
+    current: data.current,
+    days: data.days,
+    hours: data.hours,
+  })
 }

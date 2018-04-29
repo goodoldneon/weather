@@ -39,6 +39,15 @@ const getLocations = async text => {
   })
 }
 
-module.exports = {
-  getLocations,
+module.exports = async (req, res) => {
+  const text = req.query.text
+  const data = await getLocations(text)
+
+  if (data.error) {
+    return res.status(500).send({
+      error: data.error,
+    })
+  }
+
+  res.json(data)
 }
