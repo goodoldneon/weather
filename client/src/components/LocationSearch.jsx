@@ -66,7 +66,7 @@ class LocationSearch extends Component {
       return
     }
 
-    const url = `${process.env.REACT_APP_API_URL}/location?text=${text}`
+    const url = `${process.env.REACT_APP_API_URL}/location-autocomplete?text=${text}`
     let res = null
 
     try {
@@ -79,13 +79,7 @@ class LocationSearch extends Component {
       return modalError(title, errorMessage, serverErrorMessage)
     }
 
-    const results = res.data.map(a => {
-      return {
-        name: a.name,
-        lat: a.lat,
-        lng: a.lng,
-      }
-    })
+    const results = res.data
 
     this.setState({
       results: results,

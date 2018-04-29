@@ -48,6 +48,26 @@ const parseDay = raw => {
   }
 }
 
+const getLocation = async placeId => {
+  placeId = encodeURIComponent(placeId)
+
+  const key = config.googlePlaceApiKey
+  const url = `https://maps.googleapis.com/maps/api/place/details/json?key=${key}&placeid=${placeId}`
+  let res = null
+
+  try {
+    res = await axios.get(url)
+  } catch (error) {
+    return {
+      error: {
+        message: `Google Place API error: ${error.message}`,
+      },
+    }
+  }
+
+  return res.data.result.geometry.location
+}
+
 const getData = async (lat, lng) => {
   const key = config.darkskyApiKey
   const url = `https://api.darksky.net/forecast/${key}/${lat},${lng}?exclude=[minutely]&units=us`
@@ -103,12 +123,13 @@ const getDataStatic = async () => {
 }
 
 module.exports = async (req, res) => {
-  const location = req.body
+  const placeId = req.body.placeId
   let data = null
 
   if (config.useStaticWeather) {
     data = await getDataStatic()
   } else {
+    location = await getLocation(placeId)
     data = await getData(location.lat, location.lng)
   }
 

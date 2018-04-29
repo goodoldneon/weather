@@ -15,13 +15,11 @@ const darkskyApiKey = (() => {
   return key
 })()
 
-const googleGeocodeApiKey = (() => {
-  const key = process.env.GOOGLE_GEOCODE_API_KEY
+const googlePlaceApiKey = (() => {
+  const key = process.env.GOOGLE_PLACE_API_KEY
 
   if (!key) {
-    console.error(
-      'No environment variable GOOGLE_GEOCODE_API_KEY. Google Geocoding API key is required.'
-    )
+    console.error('No environment variable GOOGLE_PLACE_API_KEY. Google Place API key is required.')
 
     process.exit()
   }
@@ -46,6 +44,6 @@ const useStaticWeather = (() => {
 module.exports = {
   port,
   darkskyApiKey,
-  googleGeocodeApiKey,
+  googlePlaceApiKey,
   useStaticWeather,
 }

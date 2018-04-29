@@ -51,8 +51,7 @@ class MainContainer extends Component {
   componentWillMount() {
     const locationDefault = {
       name: 'Ann Arbor, MI 48105, USA',
-      lat: 42.3295957,
-      lng: -83.7092861,
+      placeId: 'ChIJMx9D1A2wPIgR4rXIhkb5Cds',
     }
 
     this.setState({ location: locationDefault })

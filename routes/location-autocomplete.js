@@ -7,9 +7,9 @@ const getLocations = async text => {
 	Returns an array of locations using Google's Geocode API.
 */
 
-  const key = config.googleGeocodeApiKey
-  const address = encodeURIComponent(text)
-  const url = `https://maps.googleapis.com/maps/api/geocode/json?key=${key}&address=${address}`
+  const key = config.googlePlaceApiKey
+  const input = encodeURIComponent(text)
+  const url = `https://maps.googleapis.com/maps/api/place/autocomplete/json?key=${key}&input=${input}`
   let res = null
 
   try {
@@ -30,11 +30,10 @@ const getLocations = async text => {
     }
   }
 
-  return res.data.results.map(result => {
+  return res.data.predictions.map(result => {
     return {
-      name: result.formatted_address,
-      lat: result.geometry.location.lat,
-      lng: result.geometry.location.lng,
+      name: result.description,
+      placeId: result.place_id,
     }
   })
 }
