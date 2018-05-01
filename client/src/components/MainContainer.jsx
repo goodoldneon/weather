@@ -72,6 +72,8 @@ class MainContainer extends Component {
       return modalError(title, errorMessage, serverErrorMessage)
     }
 
+    location = Object.assign({}, location, res.data.location)
+
     this.setState({
       location: location,
       current: res.data.current,

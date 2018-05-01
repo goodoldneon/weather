@@ -140,6 +140,7 @@ module.exports = async (req, res) => {
   }
 
   res.json({
+    location,
     current: data.current,
     days: data.days,
     hours: data.hours,
