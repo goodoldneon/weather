@@ -8,7 +8,8 @@
     "dev": "concurrently --kill-others \"npm start\" \"npm run dev:prettier\"",
     "dev:client": "cd ./client && yarn start",
     "dev:serve": "nodemon index.js",
-    "dev:prettier": "onchange '**/*.{js,jsx}' -- prettier --write {{changed}}"
+    "dev:prettier": "onchange '**/*.{js,jsx}' -- prettier --write {{changed}}",
+    "heroku": "NODE_ENV=production nodemon index.js"
   },
   "dependencies": {
     "axios": "^0.17.1",

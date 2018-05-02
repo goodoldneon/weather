@@ -59,7 +59,7 @@ class MainContainer extends Component {
   }
 
   getWeather = async location => {
-    const url = `${process.env.REACT_APP_API_URL}/weather`
+    const url = `${process.env.REACT_APP_API_URL}/api/weather`
     let res = null
 
     try {
