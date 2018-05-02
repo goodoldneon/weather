@@ -9,7 +9,8 @@
     "dev:client": "cd ./client && yarn start",
     "dev:serve": "nodemon index.js",
     "dev:prettier": "onchange '**/*.{js,jsx}' -- prettier --write {{changed}}",
-    "heroku": "NODE_ENV=production node index.js"
+    "heroku": "NODE_ENV=production node index.js",
+    "build:client": "cd ./client && yarn build"
   },
   "dependencies": {
     "axios": "^0.17.1",

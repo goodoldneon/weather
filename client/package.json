@@ -2,7 +2,7 @@
   "name": "client",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://localhost:60001",
+  "homepage": "https://weather-gon.herokuapp.com/",
   "dependencies": {
     "antd": "^3.0.3",
     "axios": "^0.17.1",
