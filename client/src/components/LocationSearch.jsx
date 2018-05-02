@@ -65,7 +65,7 @@ class LocationSearch extends Component {
       return
     }
 
-    const url = `${process.env.REACT_APP_API_URL}/location-autocomplete?text=${text}`
+    const url = `${process.env.REACT_APP_API_URL}/api/location-autocomplete?text=${text}`
     let res = null
 
     try {
