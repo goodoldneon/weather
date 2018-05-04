@@ -59,9 +59,9 @@ class MainContainer extends Component {
   }
 
   getWeather = async location => {
-    const url = `${process.env.REACT_APP_API_URL}/api/weather`
+    const url = `${process.env.REACT_APP_HOST_URL}/api/weather`
     let res = null
-
+console.log(url)
     try {
       res = await axios.post(url, location)
     } catch (error) {

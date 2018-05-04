@@ -1,6 +1,6 @@
 # Demo
 
-https://aaronharper.net/weather
+https://weather-gon.herokuapp.com/
 
 # Getting Started
 
@@ -15,7 +15,7 @@ https://aaronharper.net/weather
 
 * Getting your own API keys:
     * [Darksky](https://darksky.net/dev) (for weather)
-    * [Google Geocoding](https://developers.google.com/maps/documentation/geocoding/get-api-key) (for location)
+    * [Google Place](https://developers.google.com/places/web-service/get-api-key) (for location)
 
 * Put your keys in `.env`.
     * Note that `.env` will not override existing environment variables. For example, `export DARKSKY_API_KEY=abcdef` will override `.env`.
@@ -24,5 +24,14 @@ https://aaronharper.net/weather
 
 * With prettier:
     * `yarn dev`
+
 * With static weather data, found in `/test/weather.json`:
     * `USE_STATIC_WEATHER=true yarn dev:start`
+
+# Production
+
+1. Set your production host url.
+    * `client/package.json`
+    * `client/.env.production`
+
+1. Run `yarn build:client`.
